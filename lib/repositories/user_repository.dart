@@ -18,7 +18,6 @@ class UserRepository {
     if (me == null) {
       return const User.empty();
     }
-    print(me);
     return User(
       name: me.displayName,
       iconUrl: HtmlUnescape().convert(me.data!["icon_img"] as String)

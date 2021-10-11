@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'package:draw/draw.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:soreo/models/authentication_status.dart';
 
 /// A repository to handle [AuthenticationStatus].
@@ -44,7 +45,11 @@ class AuthenticationRepository {
         callbackUrlScheme: "soreo"
     );
     await _reddit.auth.authorize(Uri.parse(res).queryParameters["code"]!);
-    print("Auth done");
+    FlutterSecureStorage storage = const FlutterSecureStorage();
+    storage.write(
+        key: "redditCredentials",
+        value: _reddit.auth.credentials.toJson()
+    );
     _stateStream.add(AuthenticationStatus.authenticated);
   }
 
