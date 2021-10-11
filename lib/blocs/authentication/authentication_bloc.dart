@@ -9,15 +9,18 @@ import 'package:equatable/equatable.dart';
 import 'package:soreo/models/authentication_status.dart';
 import 'package:soreo/models/user.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
+import 'package:soreo/repositories/user_repository.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository auth;
+  final UserRepository user;
 
   AuthenticationBloc({
-    required this.auth
+    required this.auth,
+    required this.user
   })
   : super(const AuthenticationState.unauthenticated()) {
     on<AuthenticationLoginRequested>((event, emit) {
@@ -31,12 +34,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     auth.status.listen((status) => add(AuthenticationStatusChanged(status)));
   }
 
-  void _statusChanged(
+  Future<void> _statusChanged(
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit
-  ) {
+  ) async {
     switch (event.status) {
       case AuthenticationStatus.authenticated:
+        emit(AuthenticationState.authenticated(await user.getMe()));
         break;
       case AuthenticationStatus.unauthenticated:
         emit(const AuthenticationState.unauthenticated());

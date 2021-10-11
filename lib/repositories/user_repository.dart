@@ -6,6 +6,7 @@
 
 import 'package:draw/draw.dart' hide User;
 import 'package:soreo/models/user.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class UserRepository {
   final Reddit reddit;
@@ -14,6 +15,13 @@ class UserRepository {
 
   Future<User> getMe() async {
     Redditor? me = await reddit.user.me();
-    return const User();
+    if (me == null) {
+      return const User.empty();
+    }
+    print(me);
+    return User(
+      name: me.displayName,
+      iconUrl: HtmlUnescape().convert(me.data!["icon_img"] as String)
+    );
   }
 }

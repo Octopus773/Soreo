@@ -18,11 +18,15 @@ class AuthenticationRepository {
   AuthenticationRepository(Reddit reddit)
     : _reddit = reddit
   {
-    _stateStream.add(
-        _reddit.auth.isValid
-            ? AuthenticationStatus.authenticated
-            : AuthenticationStatus.unauthenticated
-    );
+    AuthenticationStatus initialState;
+    try {
+      initialState = _reddit.auth.isValid
+          ? AuthenticationStatus.authenticated
+          : AuthenticationStatus.unauthenticated;
+    } catch(_) {
+      initialState = AuthenticationStatus.unauthenticated;
+    }
+    _stateStream.add(initialState);
   }
 
   /// An updated stream with the user's connection status.
@@ -40,7 +44,8 @@ class AuthenticationRepository {
         callbackUrlScheme: "soreo"
     );
     await _reddit.auth.authorize(Uri.parse(res).queryParameters["code"]!);
-    print(await _reddit.user.me());
+    print("Auth done");
+    _stateStream.add(AuthenticationStatus.authenticated);
   }
 
   Future<void> logout() async {

@@ -5,7 +5,14 @@
  */
 
 class User {
-  const User();
+  final String name;
+  final String? iconUrl;
 
-  const User.empty();
+  User({
+    required this.name,
+    this.iconUrl
+  });
+
+  const User.empty()
+    : name = "", iconUrl = null;
 }
