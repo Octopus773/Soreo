@@ -12,12 +12,19 @@ import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/reddit_factory.dart';
 import 'package:soreo/repositories/user_repository.dart';
 import 'package:soreo/views/post_list_view.dart';
+import 'package:tuple/tuple.dart';
+
+import 'models/authentication_status.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Reddit reddit = await RedditFactory().newInstance();
-  final auth = AuthenticationRepository(reddit);
-  final user = UserRepository(reddit: reddit);
+  Tuple2<Reddit, AuthenticationStatus> reddit = await RedditFactory()
+      .newInstance();
+  final auth = AuthenticationRepository(
+      reddit: reddit.item1,
+      initialState: reddit.item2
+  );
+  final user = UserRepository(reddit: reddit.item1);
   runApp(SoreoApp(
     auth: auth,
     user: user
