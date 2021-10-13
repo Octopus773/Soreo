@@ -12,6 +12,6 @@ class PostListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("test");
+    return ListView();
   }
 }

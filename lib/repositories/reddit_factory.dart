@@ -32,8 +32,8 @@ class RedditFactory {
           clientId: await rootBundle.loadString("assets/draw.ini"),
           userAgent: "soreo",
           redirectUri: Uri.parse("soreo://authorize")
-      ),
-      AuthenticationStatus.unauthenticated
+        ),
+        AuthenticationStatus.unauthenticated
     );
   }
 }
