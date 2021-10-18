@@ -25,7 +25,11 @@ abstract class IRedditClient {
   Future<User?> me();
 
   Future<List<Post>> getPosts({
-    String? after
+    String? subreddit,
+    PostSort sortBy = PostSort.hot,
+    PostSortSince since = PostSortSince.none,
+    String? after,
+    int limit = 100
   });
 }
 
@@ -117,9 +121,26 @@ class RedditClient extends IRedditClient {
 
   @override
   Future<List<Post>> getPosts({
-    String? after
+    String? subreddit,
+    PostSort sortBy = PostSort.hot,
+    PostSortSince since = PostSortSince.none,
+    String? after,
+    int limit = 100
   }) async {
-    final posts = await _reddit.front.hot(after: after, limit: 100).toList();
+    Map<PostSort, Function> functions = {
+      PostSort.hot: _reddit.front.hot,
+      PostSort.best: _reddit.front.best,
+      PostSort.controversial: _reddit.front.controversial,
+      PostSort.news: _reddit.front.newest,
+      PostSort.random: _reddit.front.randomRising,
+      PostSort.rising: _reddit.front.rising,
+      PostSort.top: _reddit.front.top,
+    };
+
+    List<UserContent> posts = await Function.apply(functions[sortBy]!, [], {
+      #after: after,
+      #limit: limit
+    }).toList();
     return posts
         .whereType<Submission>()
         .map((event) => Post(

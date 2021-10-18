@@ -14,7 +14,19 @@ class PostRepository {
     required this.reddit
   });
 
-  Future<List<Post>> getPosts(String? after) {
-    return reddit.getPosts(after: after);
+  Future<List<Post>> getPosts({
+    String? subreddit,
+    PostSort sortBy = PostSort.hot,
+    PostSortSince since = PostSortSince.none,
+    String? after,
+    int limit = 100
+  }) {
+    return reddit.getPosts(
+      subreddit: subreddit,
+      sortBy: sortBy,
+      since: since,
+      after: after,
+      limit: limit
+    );
   }
 }
