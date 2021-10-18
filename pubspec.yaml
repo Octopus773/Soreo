@@ -35,7 +35,6 @@ dependencies:
   equatable: ^2.0.3
   cupertino_icons: ^1.0.2
   flutter_secure_storage: ^4.2.1
-  tuple: ^2.0.0
   html_unescape: ^2.0.0
   uuid: ^3.0.5
 

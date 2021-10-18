@@ -4,29 +4,21 @@
  * Copyright (c) 2021, Zoe Roux
  */
 
-import 'package:draw/draw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/pages/post_list_page.dart';
 import 'package:soreo/pages/user_icon_page.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/post_repository.dart';
-import 'package:soreo/repositories/reddit_factory.dart';
+import 'package:soreo/services/reddit_client.dart';
 import 'package:soreo/repositories/user_repository.dart';
-import 'package:tuple/tuple.dart';
-
-import 'models/authentication_status.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Tuple2<Reddit, AuthenticationStatus> reddit = await RedditFactory()
-      .newInstance();
-  final auth = AuthenticationRepository(
-      reddit: reddit.item1,
-      initialState: reddit.item2
-  );
-  final user = UserRepository(reddit: reddit.item1);
-  final posts = PostRepository(reddit: reddit.item1);
+  IRedditClient reddit = await RedditClient.newInstance();
+  final auth = AuthenticationRepository(reddit: reddit);
+  final user = UserRepository(reddit: reddit);
+  final posts = PostRepository(reddit: reddit);
   runApp(SoreoApp(
     auth: auth,
     user: user,

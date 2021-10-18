@@ -4,23 +4,19 @@
  * Copyright (c) 2021, Zoe Roux
  */
 
-import 'package:draw/draw.dart' hide User;
 import 'package:soreo/models/user.dart';
-import 'package:html_unescape/html_unescape.dart';
+import 'package:soreo/services/reddit_client.dart';
 
 class UserRepository {
-  final Reddit reddit;
+  final IRedditClient reddit;
 
   const UserRepository({required this.reddit});
 
   Future<User> getMe() async {
-    Redditor? me = await reddit.user.me();
+    User? me = await reddit.me();
     if (me == null) {
       return const User.empty();
     }
-    return User(
-      name: me.displayName,
-      iconUrl: HtmlUnescape().convert(me.data!["icon_img"] as String)
-    );
+    return me;
   }
 }
