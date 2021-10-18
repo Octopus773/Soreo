@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:soreo/models/authentication_status.dart';
 import 'package:tuple/tuple.dart';
+import 'package:uuid/uuid.dart';
 
 /// A custom factory to create [Reddit] instances.
 class RedditFactory {
@@ -27,13 +28,26 @@ class RedditFactory {
       );
     }
 
+    String? id = await storage.read(key: "deviceID");
+    if (id == null) {
+      id = const Uuid().v4();
+      await storage.write(key: "deviceId", value: id);
+    }
     return Tuple2(
-        Reddit.createInstalledFlowInstance(
+        await Reddit.createUntrustedReadOnlyInstance(
           clientId: await rootBundle.loadString("assets/draw.ini"),
-          userAgent: "soreo",
-          redirectUri: Uri.parse("soreo://authorize")
+          deviceId: id,
+          userAgent: "soreo"
         ),
         AuthenticationStatus.unauthenticated
+    );
+  }
+
+  Future<Reddit> newLogInstance() async {
+    return Reddit.createInstalledFlowInstance(
+        clientId: await rootBundle.loadString("assets/draw.ini"),
+        userAgent: "soreo",
+        redirectUri: Uri.parse("soreo://authorize")
     );
   }
 }

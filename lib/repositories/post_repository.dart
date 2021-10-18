@@ -15,8 +15,7 @@ class PostRepository {
   });
 
   Future<List<Post>> getPosts(String? after) async {
-    final posts = await reddit.front.hot(after: after).toList();
-    print(posts);
+    final posts = await reddit.front.hot(after: after, limit: 100).toList();
     return posts
         .whereType<Submission>()
         .map((event) => Post(

@@ -33,7 +33,7 @@ class AuthenticationRepository {
   /// Open a login page and retrieve an authorization code. If the user
   /// has already signed in before, simply authorize the [Reddit] singleton.
   Future<void> login() async {
-    final Uri url = reddit.auth.url(["identity"], "soreo", compactLogin: true);
+    final Uri url = reddit.auth.url(["*"], "soreo", compactLogin: true);
     final res = await FlutterWebAuth.authenticate(
         url: url.toString(),
         callbackUrlScheme: "soreo"
