@@ -16,7 +16,6 @@ part 'post_state.dart';
 class PostBloc extends Bloc<PostEvent, PostState> {
   final PostRepository repository;
   bool _fetching = false;
-  PostSort _sortOrder = PostSort.hot;
 
   PostBloc({required this.repository}) : super(const PostState()) {
     on<PostFetchRequestedEvent>((event, emit) async {
@@ -26,7 +25,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       try {
         _fetching = true;
         List<Post> posts = await repository.getPosts(
-          sortBy: _sortOrder,
+          sortBy: state.sortBy,
+          since: state.sortSince,
           after: state.posts.isNotEmpty
             ? state.posts.last.id
             : null
@@ -45,8 +45,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
     });
     on<PostSortChangedEvent>((event, emit) async {
-      _sortOrder = event.sortBy;
-      emit(const PostState());
+      emit(PostState(
+        sortBy: event.sortBy,
+        sortSince: event.sortSince
+      ));
       add(PostFetchRequestedEvent());
     });
   }
