@@ -93,6 +93,45 @@ class _PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Text(post.title + "\n" + (post.text == null ? "[no description]" : post.text as String) + "\n\n");
+   /*String s = post.title;
+
+    s += "\n";
+    if (post.text == null || post.text == "") {
+        s +=  "[no description]";
+    } else {
+      s += "[description]\n";
+      s += post.text as String;
+    }
+    s += "\n-----------------------------------";
+   return Text(post.title);*/
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.album),
+              title: Text(post.title),
+              subtitle: Text(post.text as String),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(
+                  child: const Text('BUY TICKETS'),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  child: const Text('LISTEN'),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
