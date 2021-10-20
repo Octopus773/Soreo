@@ -29,12 +29,14 @@ enum PostSortSince {
 class Post extends Equatable {
   final String id;
   final String title;
+  final String? text;
 
   const Post({
     required this.id,
-    required this.title
+    required this.title,
+    required this.text
   });
 
   @override
-  List<Object?> get props => [id, title];
+  List<Object?> get props => [id, title, text];
 }

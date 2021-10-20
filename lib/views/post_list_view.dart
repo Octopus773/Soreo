@@ -93,6 +93,6 @@ class _PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Text(post.title);
+   return Text(post.title + "\n" + (post.text == null ? "[no description]" : post.text as String) + "\n\n");
   }
 }
