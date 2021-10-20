@@ -30,11 +30,18 @@ class Post extends Equatable {
   final String id;
   final String title;
   final String? text;
+  final int upVotes;
+  final int downVotes;
+  final double upVotesRatio;
+
 
   const Post({
     required this.id,
     required this.title,
-    required this.text
+    required this.text,
+    required this.upVotes,
+    required this.downVotes,
+    required this.upVotesRatio
   });
 
   @override

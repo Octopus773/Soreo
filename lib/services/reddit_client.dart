@@ -146,7 +146,10 @@ class RedditClient extends IRedditClient {
         .map((event) => Post(
           id: event.fullname!,
           title: event.title,
-          text: event.selftext
+          text: event.selftext,
+          upVotes: event.upvotes,
+          downVotes: event.downvotes,
+          upVotesRatio: event.upvoteRatio
         ))
         .toList();
   }

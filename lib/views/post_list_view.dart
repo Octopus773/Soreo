@@ -104,13 +104,21 @@ class _PostView extends StatelessWidget {
     }
     s += "\n-----------------------------------";
    return Text(post.title);*/
+   /* print("up votes");
+    print(post.upVotes);
+    print("down votes");
+    print(post.downVotes);
+    print("display votes");
+    print((post.upVotes - post.downVotes).toString());
+    */
+   // print(post.upVotes.toString());
     return Center(
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.album),
+              leading: const Icon(Icons.album),
               title: Text(post.title),
               subtitle: Text(post.text as String),
             ),
@@ -118,12 +126,16 @@ class _PostView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(
-                  child: const Text('BUY TICKETS'),
+                  child: const Icon(Icons.thumb_up_alt_rounded),
                   onPressed: () {/* ... */},
                 ),
-                const SizedBox(width: 8),
+                Text((post.upVotes - post.downVotes).toString()),
                 TextButton(
-                  child: const Text('LISTEN'),
+                  child: const Icon(Icons.thumb_down_alt_rounded),
+                  onPressed: () {/* ... */},
+                ),
+                TextButton(
+                  child: const Icon(Icons.comment),
                   onPressed: () {/* ... */},
                 ),
                 const SizedBox(width: 8),
