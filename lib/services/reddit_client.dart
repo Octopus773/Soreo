@@ -4,13 +4,14 @@
  * Copyright (c) 2021, Zoe Roux
  */
 
-import 'package:draw/draw.dart' hide User;
+import 'package:draw/draw.dart' hide User, Subreddit;
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:soreo/models/authentication_status.dart';
 import 'package:soreo/models/post.dart';
+import 'package:soreo/models/subreddit.dart';
 import 'package:soreo/models/user.dart';
 import 'package:uuid/uuid.dart';
 
@@ -31,6 +32,8 @@ abstract class IRedditClient {
     String? after,
     int limit = 100
   });
+
+  Future<List<Subreddit>> getSubreddits();
 }
 
 
@@ -119,6 +122,24 @@ class RedditClient extends IRedditClient {
     );
   }
 
+  Map<PostSort, Function> _getSort(String? subreddit) => subreddit == null
+    ? {
+      PostSort.hot: _reddit.front.hot,
+      PostSort.controversial: _reddit.front.controversial,
+      PostSort.news: _reddit.front.newest,
+      PostSort.random: _reddit.front.randomRising,
+      PostSort.rising: _reddit.front.rising,
+      PostSort.top: _reddit.front.top,
+    }
+    : {
+      PostSort.hot: _reddit.subreddit(subreddit).hot,
+      PostSort.controversial: _reddit.subreddit(subreddit).controversial,
+      PostSort.news: _reddit.subreddit(subreddit).newest,
+      PostSort.random: _reddit.subreddit(subreddit).randomRising,
+      PostSort.rising: _reddit.subreddit(subreddit).rising,
+      PostSort.top: _reddit.subreddit(subreddit).top,
+    };
+
   @override
   Future<List<Post>> getPosts({
     String? subreddit,
@@ -127,17 +148,7 @@ class RedditClient extends IRedditClient {
     String? after,
     int limit = 100
   }) async {
-    Map<PostSort, Function> functions = {
-      PostSort.hot: _reddit.front.hot,
-      PostSort.best: _reddit.front.best,
-      PostSort.controversial: _reddit.front.controversial,
-      PostSort.news: _reddit.front.newest,
-      PostSort.random: _reddit.front.randomRising,
-      PostSort.rising: _reddit.front.rising,
-      PostSort.top: _reddit.front.top,
-    };
-
-    List<UserContent> posts = await Function.apply(functions[sortBy]!, [], {
+    List<UserContent> posts = await Function.apply(_getSort(subreddit)[sortBy]!, [], {
       #after: after,
       #limit: limit
     }).toList();
@@ -152,5 +163,14 @@ class RedditClient extends IRedditClient {
           upVotesRatio: event.upvoteRatio
         ))
         .toList();
+  }
+
+  @override
+  Future<List<Subreddit>> getSubreddits() async {
+    var ret = await _reddit.user.subreddits().toList();
+    return ret.map((e) => Subreddit(
+        id: e.id,
+        title: e.title
+    )).toList();
   }
 }
