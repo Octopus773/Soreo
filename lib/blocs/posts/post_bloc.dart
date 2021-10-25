@@ -25,21 +25,31 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       try {
         _fetching = true;
         List<Post> posts = await repository.getPosts(
-            state.posts.isNotEmpty
-                ? state.posts.last.id
-                : null
+          sortBy: state.sortBy,
+          since: state.sortSince,
+          after: state.posts.isNotEmpty
+            ? state.posts.last.id
+            : null
         );
         emit(state.copyWith(
             posts: List.of(state.posts)..addAll(posts),
             status: PostStatus.success,
             hasReachedMax: posts.isEmpty
         ));
-      } catch(_) {
+      } catch(e) {
+        print(e);
         emit(state.copyWith(status: PostStatus.failure));
       }
       finally {
         _fetching = false;
       }
+    });
+    on<PostSortChangedEvent>((event, emit) async {
+      emit(PostState(
+        sortBy: event.sortBy,
+        sortSince: event.sortSince
+      ));
+      add(PostFetchRequestedEvent());
     });
   }
 }

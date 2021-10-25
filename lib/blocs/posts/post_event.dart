@@ -11,3 +11,15 @@ abstract class PostEvent {}
 
 @immutable
 class PostFetchRequestedEvent extends PostEvent {}
+
+@immutable
+class PostSortChangedEvent extends PostEvent {
+  final PostSort sortBy;
+  final PostSortSince sortSince;
+
+  PostSortChangedEvent({
+    this.sortBy = PostSort.hot,
+    this.sortSince = PostSortSince.none,
+  });
+}
+
