@@ -93,25 +93,6 @@ class _PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   /*String s = post.title;
-
-    s += "\n";
-    if (post.text == null || post.text == "") {
-        s +=  "[no description]";
-    } else {
-      s += "[description]\n";
-      s += post.text as String;
-    }
-    s += "\n-----------------------------------";
-   return Text(post.title);*/
-   /* print("up votes");
-    print(post.upVotes);
-    print("down votes");
-    print(post.downVotes);
-    print("display votes");
-    print((post.upVotes - post.downVotes).toString());
-    */
-   // print(post.upVotes.toString());
     return Center(
       child: Card(
         child: Column(
