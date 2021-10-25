@@ -93,6 +93,38 @@ class _PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Text(post.title);
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.album),
+              title: Text(post.title),
+              subtitle: Text(post.text as String),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(
+                  child: const Icon(Icons.thumb_up_alt_rounded),
+                  onPressed: () {/* ... */},
+                ),
+                Text((post.upVotes - post.downVotes).toString()),
+                TextButton(
+                  child: const Icon(Icons.thumb_down_alt_rounded),
+                  onPressed: () {/* ... */},
+                ),
+                TextButton(
+                  child: const Icon(Icons.comment),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

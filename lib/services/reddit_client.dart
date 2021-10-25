@@ -122,22 +122,22 @@ class RedditClient extends IRedditClient {
   }
 
   Map<PostSort, Function> _getSort(String? subreddit) => subreddit == null
-      ? {
-    PostSort.hot: _reddit.front.hot,
-    PostSort.controversial: _reddit.front.controversial,
-    PostSort.news: _reddit.front.newest,
-    PostSort.random: _reddit.front.randomRising,
-    PostSort.rising: _reddit.front.rising,
-    PostSort.top: _reddit.front.top,
-  }
-      : {
-    PostSort.hot: _reddit.subreddit(subreddit).hot,
-    PostSort.controversial: _reddit.subreddit(subreddit).controversial,
-    PostSort.news: _reddit.subreddit(subreddit).newest,
-    PostSort.random: _reddit.subreddit(subreddit).randomRising,
-    PostSort.rising: _reddit.subreddit(subreddit).rising,
-    PostSort.top: _reddit.subreddit(subreddit).top,
-  };
+    ? {
+      PostSort.hot: _reddit.front.hot,
+      PostSort.controversial: _reddit.front.controversial,
+      PostSort.news: _reddit.front.newest,
+      PostSort.random: _reddit.front.randomRising,
+      PostSort.rising: _reddit.front.rising,
+      PostSort.top: _reddit.front.top,
+    }
+    : {
+      PostSort.hot: _reddit.subreddit(subreddit).hot,
+      PostSort.controversial: _reddit.subreddit(subreddit).controversial,
+      PostSort.news: _reddit.subreddit(subreddit).newest,
+      PostSort.random: _reddit.subreddit(subreddit).randomRising,
+      PostSort.rising: _reddit.subreddit(subreddit).rising,
+      PostSort.top: _reddit.subreddit(subreddit).top,
+    };
 
   @override
   Future<List<Post>> getPosts({
@@ -154,9 +154,13 @@ class RedditClient extends IRedditClient {
     return posts
         .whereType<Submission>()
         .map((event) => Post(
-      id: event.fullname!,
-      title: event.title,
-    ))
+          id: event.fullname!,
+          title: event.title,
+          text: event.selftext,
+          upVotes: event.upvotes,
+          downVotes: event.downvotes,
+          upVotesRatio: event.upvoteRatio
+        ))
         .toList();
   }
 
