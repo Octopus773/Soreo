@@ -127,7 +127,6 @@ class RedditClient extends IRedditClient {
       PostSort.hot: _reddit.front.hot,
       PostSort.controversial: _reddit.front.controversial,
       PostSort.news: _reddit.front.newest,
-      PostSort.random: _reddit.front.randomRising,
       PostSort.rising: _reddit.front.rising,
       PostSort.top: _reddit.front.top,
     }
@@ -135,7 +134,6 @@ class RedditClient extends IRedditClient {
       PostSort.hot: _reddit.subreddit(subreddit).hot,
       PostSort.controversial: _reddit.subreddit(subreddit).controversial,
       PostSort.news: _reddit.subreddit(subreddit).newest,
-      PostSort.random: _reddit.subreddit(subreddit).randomRising,
       PostSort.rising: _reddit.subreddit(subreddit).rising,
       PostSort.top: _reddit.subreddit(subreddit).top,
     };
@@ -160,7 +158,9 @@ class RedditClient extends IRedditClient {
           return Post(
             id: event.fullname!,
             title: event.title,
-            text: event.selftext,
+            text:  event.selftext != null
+              ? HtmlUnescape().convert(event.selftext!)
+              : null,
             upVotes: event.upvotes,
             downVotes: event.downvotes,
             upVotesRatio: event.upvoteRatio,

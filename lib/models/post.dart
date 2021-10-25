@@ -9,7 +9,6 @@ import 'package:soreo/models/subreddit.dart';
 
 enum PostSort {
   hot,
-  random,
   rising,
   controversial,
   news,

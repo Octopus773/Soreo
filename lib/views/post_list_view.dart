@@ -7,6 +7,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
 import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/post_page.dart';
@@ -116,7 +117,7 @@ class _PostView extends StatelessWidget {
                   ),
                 ),
                 title: Text(post.title),
-                subtitle: Text(post.text as String),
+                subtitle: MarkdownBody(data: post.text ?? "???"),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
