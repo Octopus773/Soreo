@@ -150,7 +150,6 @@ class RedditClient extends IRedditClient {
       #after: after,
       #limit: limit
     }).toList();
-    print(posts);
     return await Future.wait(posts
       .whereType<Submission>()
       .map((event) async {
@@ -158,7 +157,7 @@ class RedditClient extends IRedditClient {
 
         return Post(
           id: event.fullname!,
-          title: event.title,
+          title: HtmlUnescape().convert(event.title),
           text:  event.selftext != null
             ? HtmlUnescape().convert(event.selftext!)
             : null,

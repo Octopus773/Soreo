@@ -39,7 +39,10 @@ dependencies:
   uuid: ^3.0.5
   flutter_markdown: ^0.6.8
   video_player:
-  chewie: ^1.2.2
+  flick_video_player: ^0.3.1
+
+dependency_overrides:
+  provider: ^6.0.1 # for chewie 1.2.2
 
 dev_dependencies:
   flutter_test:
