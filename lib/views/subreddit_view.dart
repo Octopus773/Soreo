@@ -17,6 +17,11 @@ class SubredditView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PostListView();
+    return const MaterialApp(
+        title: "Soreo",
+        home: Scaffold(
+          body: PostListView()
+      )
+    );
   }
 }

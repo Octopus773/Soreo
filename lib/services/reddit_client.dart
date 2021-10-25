@@ -167,7 +167,7 @@ class RedditClient extends IRedditClient {
             subReddit: Subreddit(
               id: sub.id,
               description: sub.data?["public_description"],
-              fullName: sub.fullname ?? "???",
+              fullName: sub.displayName,
               iconImage: sub.iconImage,
               over18: sub.over18,
               title: sub.title

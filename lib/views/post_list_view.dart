@@ -111,7 +111,7 @@ class _PostView extends StatelessWidget {
                   child: const Icon(Icons.album),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => SubredditPage(subreddit: null!)
+                      builder: (_) => SubredditPage(subreddit: post.subReddit)
                     )
                   ),
                 ),

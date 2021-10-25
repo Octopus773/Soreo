@@ -22,7 +22,7 @@ class SubredditPage extends StatelessWidget {
     return BlocProvider(
         create: (ctx) => PostBloc(
           repository: ctx.read(),
-          subreddit: subreddit.id
+          subreddit: subreddit.fullName
         )..add(PostFetchRequestedEvent()),
         child: SubredditView(subreddit: subreddit)
     );
