@@ -154,7 +154,6 @@ class RedditClient extends IRedditClient {
       .whereType<Submission>()
       .map((event) async {
         var sub = await event.subreddit.populate();
-
         return Post(
           id: event.fullname!,
           title: HtmlUnescape().convert(event.title),

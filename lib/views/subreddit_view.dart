@@ -17,10 +17,20 @@ class SubredditView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         title: "Soreo",
         home: Scaffold(
-          body: PostListView()
+          appBar: AppBar(
+            title: Text("${subreddit.fullName} - Soreo")
+          ),
+          body: Column(
+            children: [
+              Center(
+                child: Image.network(subreddit.iconImage.toString())
+              ),
+              const Expanded(child: PostListView())
+            ]
+          )
       )
     );
   }
