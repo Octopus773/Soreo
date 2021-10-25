@@ -34,6 +34,8 @@ class Post extends Equatable {
   final int downVotes;
   final double upVotesRatio;
   final Subreddit subReddit;
+  final String? videoUrl;
+  final String? imageUrl;
 
 
   const Post({
@@ -43,7 +45,9 @@ class Post extends Equatable {
     required this.upVotes,
     required this.downVotes,
     required this.upVotesRatio,
-    required this.subReddit
+    required this.subReddit,
+    this.videoUrl,
+    this.imageUrl
   });
 
   @override

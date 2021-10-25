@@ -13,6 +13,7 @@ import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/post_page.dart';
 import 'package:soreo/pages/subreddit_page.dart';
 import 'package:soreo/views/sort_button_view.dart';
+import 'package:video_player/video_player.dart';
 
 class PostListView extends StatefulWidget {
   const PostListView({Key? key}) : super(key: key);
@@ -86,13 +87,43 @@ class _PostsListState extends State<PostListView> {
   }
 }
 
-class _PostView extends StatelessWidget {
+class _PostView extends StatefulWidget {
   final Post post;
 
   const _PostView({
     required this.post,
     Key? key
   }) : super(key: key);
+
+  @override
+  _PostState createState() => _PostState(post: post);
+}
+
+class _PostState extends State<_PostView> {
+  final Post post;
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+
+  _PostState({
+    required this.post,
+  });
+
+  @override
+  void initState() {
+    if (post.videoUrl != null) {
+      _controller = VideoPlayerController.network(post.videoUrl!);
+      _initializeVideoPlayerFuture = _controller.initialize();
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (post.videoUrl != null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +148,26 @@ class _PostView extends StatelessWidget {
                   ),
                 ),
                 title: Text(post.title),
-                subtitle: MarkdownBody(data: post.text ?? "???"),
+                subtitle: Column(
+                  children: [
+                    MarkdownBody(data: post.text ?? "???"),
+                    // if (post.imageUrl != null)
+                    //   Image.network(post.imageUrl!),
+                    if (post.videoUrl != null)
+                      FutureBuilder(
+                        future: _initializeVideoPlayerFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            return AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(_controller))
+                            ;
+                          }
+                          return const Center(child: CircularProgressIndicator());
+                        },
+                      )
+                  ]
+                )
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

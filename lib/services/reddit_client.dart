@@ -150,31 +150,34 @@ class RedditClient extends IRedditClient {
       #after: after,
       #limit: limit
     }).toList();
+    print(posts);
     return await Future.wait(posts
-        .whereType<Submission>()
-        .map((event) async {
-          var sub = await event.subreddit.populate();
+      .whereType<Submission>()
+      .map((event) async {
+        var sub = await event.subreddit.populate();
 
-          return Post(
-            id: event.fullname!,
-            title: event.title,
-            text:  event.selftext != null
-              ? HtmlUnescape().convert(event.selftext!)
-              : null,
-            upVotes: event.upvotes,
-            downVotes: event.downvotes,
-            upVotesRatio: event.upvoteRatio,
-            subReddit: Subreddit(
-              id: sub.id,
-              description: sub.data?["public_description"],
-              fullName: sub.displayName,
-              iconImage: sub.iconImage,
-              over18: sub.over18,
-              title: sub.title
-          ));
-            }
-        )
-        .toList());
+        return Post(
+          id: event.fullname!,
+          title: event.title,
+          text:  event.selftext != null
+            ? HtmlUnescape().convert(event.selftext!)
+            : null,
+          videoUrl: event.isVideo ? event.data!["media"]["reddit_video"]["hls_url"] : null,
+          imageUrl: event.url.toString(),
+          upVotes: event.upvotes,
+          downVotes: event.downvotes,
+          upVotesRatio: event.upvoteRatio,
+          subReddit: Subreddit(
+            id: sub.id,
+            description: sub.data?["public_description"],
+            fullName: sub.displayName,
+            iconImage: sub.iconImage,
+            over18: sub.over18,
+            title: sub.title
+          )
+        );
+      })
+      .toList());
   }
 
   @override
