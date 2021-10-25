@@ -6,8 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:soreo/pages/post_list_page.dart';
-import 'package:soreo/pages/user_icon_page.dart';
+import 'package:soreo/pages/home_page.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/post_repository.dart';
 import 'package:soreo/services/reddit_client.dart';
@@ -46,17 +45,9 @@ class SoreoApp extends StatelessWidget {
         RepositoryProvider.value(value: user),
         RepositoryProvider.value(value: posts),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         title: "Soreo",
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Soreo"),
-            actions: const [
-              UserIconPage()
-            ]
-          ),
-          body: const PostListPage()
-        )
+        home: HomePage()
       )
     );
   }

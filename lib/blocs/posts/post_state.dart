@@ -1,3 +1,9 @@
+/*
+ * Soreo - A custom reddit client in flutter.
+ *
+ * Copyright (c) 2021, Zoe Roux
+ */
+
 part of 'post_bloc.dart';
 
 enum PostStatus { initial, success, failure }

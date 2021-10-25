@@ -6,30 +6,11 @@
 
 import 'package:equatable/equatable.dart';
 
-enum PostSort {
-  hot,
-  random,
-  rising,
-  controversial,
-  news,
-  top
-}
-
-enum PostSortSince {
-  none,
-  hour,
-  day,
-  week,
-  month,
-  year,
-  all
-}
-
-class Post extends Equatable {
-  final String id;
+class Subreddit extends Equatable {
+  final String? id;
   final String title;
 
-  const Post({
+  const Subreddit({
     required this.id,
     required this.title
   });
