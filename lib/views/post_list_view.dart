@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
 import 'package:soreo/models/post.dart';
+import 'package:soreo/pages/post_page.dart';
 import 'package:soreo/views/sort_button_view.dart';
 
 class PostListView extends StatefulWidget {
@@ -94,37 +95,44 @@ class _PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(Icons.album),
-              title: Text(post.title),
-              subtitle: Text(post.text as String),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                TextButton(
-                  child: const Icon(Icons.thumb_up_alt_rounded),
-                  onPressed: () {/* ... */},
-                ),
-                Text((post.upVotes - post.downVotes).toString()),
-                TextButton(
-                  child: const Icon(Icons.thumb_down_alt_rounded),
-                  onPressed: () {/* ... */},
-                ),
-                TextButton(
-                  child: const Icon(Icons.comment),
-                  onPressed: () {/* ... */},
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
-          ],
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => PostPage(post: post)
+            )
         ),
-      ),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.album),
+                title: Text(post.title),
+                subtitle: Text(post.text as String),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextButton(
+                    child: const Icon(Icons.thumb_up_alt_rounded),
+                    onPressed: () {/* ... */},
+                  ),
+                  Text((post.upVotes - post.downVotes).toString()),
+                  TextButton(
+                    child: const Icon(Icons.thumb_down_alt_rounded),
+                    onPressed: () {/* ... */},
+                  ),
+                  TextButton(
+                    child: const Icon(Icons.comment),
+                    onPressed: () {/* ... */},
+                  ),
+                  const SizedBox(width: 8),
+                ],
+              ),
+            ],
+          ),
+        )
+      )
     );
   }
 }

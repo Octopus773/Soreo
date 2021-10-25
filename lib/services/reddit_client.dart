@@ -4,13 +4,14 @@
  * Copyright (c) 2021, Zoe Roux
  */
 
-import 'package:draw/draw.dart' hide User;
+import 'package:draw/draw.dart' hide User, Subreddit;
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:soreo/models/authentication_status.dart';
 import 'package:soreo/models/post.dart';
+import 'package:soreo/models/subreddit.dart';
 import 'package:soreo/models/user.dart';
 import 'package:uuid/uuid.dart';
 
