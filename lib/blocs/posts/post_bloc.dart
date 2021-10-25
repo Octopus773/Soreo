@@ -15,9 +15,13 @@ part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   final PostRepository repository;
+  final String? subreddit;
   bool _fetching = false;
 
-  PostBloc({required this.repository}) : super(const PostState()) {
+  PostBloc({
+    required this.repository,
+    this.subreddit
+  }) : super(const PostState()) {
     on<PostFetchRequestedEvent>((event, emit) async {
       if (state.hasReachedMax || _fetching) {
         return;
@@ -25,6 +29,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       try {
         _fetching = true;
         List<Post> posts = await repository.getPosts(
+          subreddit: subreddit,
           sortBy: state.sortBy,
           since: state.sortSince,
           after: state.posts.isNotEmpty

@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
 import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/post_page.dart';
+import 'package:soreo/pages/subreddit_page.dart';
 import 'package:soreo/views/sort_button_view.dart';
 
 class PostListView extends StatefulWidget {
@@ -106,7 +107,14 @@ class _PostView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: const Icon(Icons.album),
+                leading: GestureDetector(
+                  child: const Icon(Icons.album),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => SubredditPage(subreddit: null!)
+                    )
+                  ),
+                ),
                 title: Text(post.title),
                 subtitle: Text(post.text as String),
               ),
