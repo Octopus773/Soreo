@@ -52,6 +52,10 @@ class SoreoApp extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Soreo"),
             actions: const [
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: Icon(Icons.search)
+              ),
               UserIconPage()
             ]
           ),
