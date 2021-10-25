@@ -5,6 +5,7 @@
  */
 
 import 'package:equatable/equatable.dart';
+import 'package:soreo/models/subreddit.dart';
 
 enum PostSort {
   hot,
@@ -33,6 +34,7 @@ class Post extends Equatable {
   final int upVotes;
   final int downVotes;
   final double upVotesRatio;
+  final Subreddit subReddit;
 
 
   const Post({
@@ -41,9 +43,10 @@ class Post extends Equatable {
     required this.text,
     required this.upVotes,
     required this.downVotes,
-    required this.upVotesRatio
+    required this.upVotesRatio,
+    required this.subReddit
   });
 
   @override
-  List<Object?> get props => [id, title, text, upVotes, downVotes, upVotesRatio];
+  List<Object?> get props => [id, title, text, upVotes, downVotes, upVotesRatio, subReddit];
 }

@@ -10,8 +10,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:soreo/models/authentication_status.dart';
-import 'package:soreo/models/post.dart';
 import 'package:soreo/models/subreddit.dart';
+import 'package:soreo/models/post.dart';
 import 'package:soreo/models/user.dart';
 import 'package:uuid/uuid.dart';
 
@@ -152,17 +152,29 @@ class RedditClient extends IRedditClient {
       #after: after,
       #limit: limit
     }).toList();
-    return posts
+    return await Future.wait(posts
         .whereType<Submission>()
-        .map((event) => Post(
-          id: event.fullname!,
-          title: event.title,
-          text: event.selftext,
-          upVotes: event.upvotes,
-          downVotes: event.downvotes,
-          upVotesRatio: event.upvoteRatio
-        ))
-        .toList();
+        .map((event) async {
+          var sub = await event.subreddit.populate();
+
+          return Post(
+            id: event.fullname!,
+            title: event.title,
+            text: event.selftext,
+            upVotes: event.upvotes,
+            downVotes: event.downvotes,
+            upVotesRatio: event.upvoteRatio,
+            subReddit: Subreddit(
+              id: sub.id,
+              description: sub.data?["public_description"],
+              fullName: sub.fullname ?? "???",
+              iconImage: sub.iconImage,
+              over18: sub.over18,
+              title: sub.title
+          ));
+            }
+        )
+        .toList());
   }
 
   @override
@@ -170,7 +182,11 @@ class RedditClient extends IRedditClient {
     var ret = await _reddit.user.subreddits().toList();
     return ret.map((e) => Subreddit(
         id: e.id,
-        title: e.title
+        title: e.title,
+        description: e.data?["public_description"],
+        over18: e.over18,
+        fullName: e.fullname ?? "???",
+        iconImage: e.iconImage
     )).toList();
   }
 }
