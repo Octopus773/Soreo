@@ -20,6 +20,7 @@ Future<void> main() async {
   final user = UserRepository(reddit: reddit);
   final posts = PostRepository(reddit: reddit);
   runApp(SoreoApp(
+    reddit: reddit,
     auth: auth,
     user: user,
     posts: posts
@@ -30,9 +31,11 @@ class SoreoApp extends StatelessWidget {
   final AuthenticationRepository auth;
   final UserRepository user;
   final PostRepository posts;
+  final IRedditClient reddit;
 
   const SoreoApp({
     Key? key,
+    required this.reddit,
     required this.auth,
     required this.user,
     required this.posts
@@ -42,6 +45,7 @@ class SoreoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider.value(value: reddit),
         RepositoryProvider.value(value: auth),
         RepositoryProvider.value(value: user),
         RepositoryProvider.value(value: posts),

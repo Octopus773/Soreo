@@ -5,6 +5,7 @@
  */
 
 import 'package:draw/draw.dart' hide User, Subreddit;
+import 'package:draw/draw.dart' as draw;
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
@@ -34,6 +35,10 @@ abstract class IRedditClient {
   });
 
   Future<List<Subreddit>> getSubreddits();
+
+  Future<bool> isSubscribedToSubreddit(String subreddit);
+  Future subscribe(String subreddit);
+  Future unsubscribe(String subreddit);
 }
 
 
@@ -138,6 +143,25 @@ class RedditClient extends IRedditClient {
       PostSort.top: _reddit.subreddit(subreddit).top,
     };
 
+  String? nullIfEmpty(String? str) => str?.isEmpty == true ? null : str;
+
+  Subreddit convertFromReddit(draw.Subreddit sub) {
+    String? banner = nullIfEmpty(sub.data?["mobile_banner_image"])
+        ?? nullIfEmpty(sub.data?["banner_background_image"])
+        ?? nullIfEmpty(sub.data?["banner_img"]);
+    return Subreddit(
+      id: sub.id,
+      description: sub.data?["public_description"],
+      title: sub.displayName,
+      fullName: sub.displayName,
+      iconImage: sub.iconImage != null ? HtmlUnescape().convert(sub.iconImage.toString()) : null,
+      bannerImage: banner != null ? HtmlUnescape().convert(banner) : null,
+      over18: sub.over18,
+      subscriberCount: sub.data?["subscribers"],
+      activeUserCount: sub.data?["active_user_count"],
+    );
+  }
+
   @override
   Future<List<Post>> getPosts({
     String? subreddit,
@@ -153,7 +177,6 @@ class RedditClient extends IRedditClient {
     return await Future.wait(posts
       .whereType<Submission>()
       .map((event) async {
-        var sub = await event.subreddit.populate();
         return Post(
           id: event.fullname!,
           title: HtmlUnescape().convert(event.title),
@@ -165,14 +188,7 @@ class RedditClient extends IRedditClient {
           upVotes: event.upvotes,
           downVotes: event.downvotes,
           upVotesRatio: event.upvoteRatio,
-          subReddit: Subreddit(
-            id: sub.id,
-            description: sub.data?["public_description"],
-            fullName: sub.displayName,
-            iconImage: sub.iconImage,
-            over18: sub.over18,
-            title: sub.title
-          )
+          subReddit: convertFromReddit(await event.subreddit.populate())
         );
       })
       .toList());
@@ -181,13 +197,30 @@ class RedditClient extends IRedditClient {
   @override
   Future<List<Subreddit>> getSubreddits() async {
     var ret = await _reddit.user.subreddits().toList();
-    return ret.map((e) => Subreddit(
-        id: e.id,
-        title: e.title,
-        description: e.data?["public_description"],
-        over18: e.over18,
-        fullName: e.fullname ?? "???",
-        iconImage: e.iconImage
-    )).toList();
+    return ret.map(convertFromReddit).toList();
+  }
+
+  @override
+  Future<bool> isSubscribedToSubreddit(String subreddit) async {
+    if (_state == AuthenticationStatus.unauthenticated) {
+      return false;
+    }
+    return (await getSubreddits()).any((element) => element.fullName == subreddit);
+  }
+
+  @override
+  Future subscribe(String subreddit) async {
+    if (_state == AuthenticationStatus.unauthenticated) {
+      await login();
+    }
+    await _reddit.subreddit(subreddit).subscribe();
+  }
+
+  @override
+  Future unsubscribe(String subreddit) async {
+    if (_state == AuthenticationStatus.unauthenticated) {
+      await login();
+    }
+    await _reddit.subreddit(subreddit).unsubscribe();
   }
 }

@@ -24,7 +24,8 @@ class PostListView extends StatefulWidget {
 }
 
 class _PostsListState extends State<PostListView> {
-  final _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
+  bool _scrollControllerIsFromContext = false;
 
 
   @override
@@ -36,9 +37,14 @@ class _PostsListState extends State<PostListView> {
   @override
   void dispose() {
     super.dispose();
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    disposeScrollController();
+  }
+
+  void disposeScrollController() {
+    _scrollController.removeListener(_onScroll);
+    if (!_scrollControllerIsFromContext) {
+      _scrollController.dispose();
+    }
   }
 
   void _onScroll() {
@@ -56,33 +62,38 @@ class _PostsListState extends State<PostListView> {
   Widget build(BuildContext context) {
     return BlocBuilder<PostBloc, PostState>(
         builder: (child, state) {
-        switch (state.status) {
-          case PostStatus.initial:
-            return const Center(child: CircularProgressIndicator());
-          case PostStatus.failure:
-            return const Center(child: Text("Failed to fetch posts."));
-          case PostStatus.success:
-            return Column(
-              children: [
-                const SortButtonView(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.posts.length + (state.hasReachedMax ? 0 : 1),
-                    controller: _scrollController,
-                    itemBuilder: (ctx, index) => index < state.posts.length
-                      ? _PostView(post: state.posts[index])
-                      : const Center(
-                          child: SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(strokeWidth: 1.5),
-                          ),
-                        )
-                  )
-                )
-              ]
-            );
-        }
+          ScrollController? ctxScroll = PrimaryScrollController.of(context);
+          if (_scrollController != ctxScroll && ctxScroll != null) {
+            disposeScrollController();
+            _scrollController = ctxScroll..addListener(_onScroll);
+            _scrollControllerIsFromContext = true;
+          }
+          switch (state.status) {
+            case PostStatus.initial:
+              return const Center(child: CircularProgressIndicator());
+            case PostStatus.failure:
+              return const Center(child: Text("Failed to fetch posts."));
+            case PostStatus.success:
+              return ListView.builder(
+                itemCount: state.posts.length + (state.hasReachedMax ? 1 : 2),
+                controller: _scrollController,
+                itemBuilder: (ctx, index) {
+                  if (index == 0) {
+                    return const SortButtonView();
+                  }
+                  if (index < state.posts.length) {
+                    return _PostView(post: state.posts[index]);
+                  }
+                  return const Center(
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(strokeWidth: 1.5),
+                    )
+                  );
+                }
+              );
+          }
       }
     );
   }
@@ -141,10 +152,6 @@ class _PostView extends StatelessWidget {
                   Text((post.upVotes - post.downVotes).toString()),
                   TextButton(
                     child: const Icon(Icons.thumb_down_alt_rounded),
-                    onPressed: () {/* ... */},
-                  ),
-                  TextButton(
-                    child: const Icon(Icons.comment),
                     onPressed: () {/* ... */},
                   ),
                   const SizedBox(width: 8),
