@@ -68,7 +68,7 @@ class SoreoApp extends StatelessWidget {
                       child: const Icon(Icons.search),
                       onTap: () => Navigator.of(ctx)
                         .push(MaterialPageRoute(
-                          builder: (_) => const SearchPage()
+                          builder: (_) => SearchPage(repository: ctx.read())
                         )),
                     )
                   )

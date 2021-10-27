@@ -39,6 +39,7 @@ abstract class IRedditClient {
   Future<bool> isSubscribedToSubreddit(String subreddit);
   Future subscribe(String subreddit);
   Future unsubscribe(String subreddit);
+  Future<List<String>> searchSubreddit(String query);
 }
 
 
@@ -225,5 +226,12 @@ class RedditClient extends IRedditClient {
       await login();
     }
     await _reddit.subreddit(subreddit).unsubscribe();
+  }
+
+  @override
+  Future<List<String>> searchSubreddit(String query) async {
+    return await _reddit.subreddits.search(query)
+      .map((x) => x.displayName)
+      .toList();
   }
 }
