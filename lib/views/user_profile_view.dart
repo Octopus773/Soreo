@@ -32,13 +32,38 @@ class UserProfileView extends StatelessWidget
                 ),
                 body: Column(
                     children: [
-                      ElevatedButton(
-                          child: const Text("Logout"),
-                          onPressed: () {
-                            context.read<AuthenticationBloc>()
-                                .add(AuthenticationLogoutRequested());
-                            Navigator.of(context).pop();
-                          }
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Container(
+                            width: 250,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: state.user.iconUrl != null
+                                  ? NetworkImage(state.user.iconUrl!)
+                                  : const AssetImage("profile.png") as ImageProvider<Object>
+                              )
+                            )
+                          )
+                        )
+                      ),
+                      Center(
+                        child: Text(state.user.name)
+                      ),
+                      Center(
+                        child: Text(state.user.description)
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                            child: const Text("Logout"),
+                            onPressed: () {
+                              context.read<AuthenticationBloc>()
+                                  .add(AuthenticationLogoutRequested());
+                              Navigator.of(context).pop();
+                            }
+                        )
                       )
                     ]
                 )

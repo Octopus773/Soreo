@@ -13,6 +13,8 @@ import 'package:soreo/repositories/post_repository.dart';
 import 'package:soreo/services/reddit_client.dart';
 import 'package:soreo/repositories/user_repository.dart';
 
+import 'blocs/authentication/authentication_bloc.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   IRedditClient reddit = await RedditClient.newInstance();
@@ -50,20 +52,23 @@ class SoreoApp extends StatelessWidget {
         RepositoryProvider.value(value: user),
         RepositoryProvider.value(value: posts),
       ],
-      child: MaterialApp(
-        title: "Soreo",
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Soreo"),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Icon(Icons.search)
-              ),
-              UserIconPage()
-            ]
-          ),
-          body: const PostListPage()
+      child: BlocProvider(
+        create: (ctx) => AuthenticationBloc(auth: ctx.read(), user: ctx.read()),
+        child: MaterialApp(
+          title: "Soreo",
+          home: Scaffold(
+            appBar: AppBar(
+              title: const Text("Soreo"),
+              actions: const [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(Icons.search)
+                ),
+                UserIconPage()
+              ]
+            ),
+            body: const PostListPage()
+          )
         )
       )
     );

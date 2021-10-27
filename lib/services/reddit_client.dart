@@ -123,6 +123,7 @@ class RedditClient extends IRedditClient {
     }
     return User(
         name: me.displayName,
+        description: me.data?["subreddit"]["description"] ?? "",
         iconUrl: HtmlUnescape().convert(me.data!["icon_img"] as String)
     );
   }

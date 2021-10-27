@@ -6,8 +6,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:soreo/blocs/authentication/authentication_bloc.dart';
 import 'package:soreo/views/user_profile_view.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -16,9 +14,6 @@ class UserProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (ctx) => AuthenticationBloc(auth: ctx.read(), user: ctx.read()),
-      child: const UserProfileView()
-    );
+    return const UserProfileView();
   }
 }
