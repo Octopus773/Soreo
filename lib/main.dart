@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/pages/post_list_page.dart';
+import 'package:soreo/pages/search_page.dart';
 import 'package:soreo/pages/user_icon_page.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/post_repository.dart';
@@ -59,12 +60,20 @@ class SoreoApp extends StatelessWidget {
           home: Scaffold(
             appBar: AppBar(
               title: const Text("Soreo"),
-              actions: const [
+              actions: [
                 Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(Icons.search)
+                  padding: const EdgeInsets.all(8),
+                  child: Builder(
+                    builder: (ctx) => GestureDetector(
+                      child: const Icon(Icons.search),
+                      onTap: () => Navigator.of(ctx)
+                        .push(MaterialPageRoute(
+                          builder: (_) => const SearchPage()
+                        )),
+                    )
+                  )
                 ),
-                UserIconPage()
+                const UserIconPage()
               ]
             ),
             body: const PostListPage()

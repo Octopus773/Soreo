@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/subreddit/subreddit_bloc.dart';
 import 'package:soreo/models/subreddit.dart';
+import 'package:soreo/pages/user_icon_page.dart';
 import 'package:soreo/views/post_list_view.dart';
 import 'package:soreo/views/subscribe_button_view.dart';
 
@@ -53,9 +54,9 @@ class SubredditView extends StatelessWidget {
                           ]
                         )
                       ),
-                    // actions: const [
-                    //   UserIconPage()
-                    // ],
+                    actions: const [
+                      UserIconPage()
+                    ],
                   ),
                 ];
               },

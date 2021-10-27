@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  flappy_search_bar_ns:
+    dependency: "direct main"
+    description:
+      name: flappy_search_bar_ns
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   flick_video_player:
     dependency: "direct main"
     description:
@@ -153,6 +160,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
+  flutter_staggered_grid_view:
+    dependency: transitive
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
