@@ -185,7 +185,9 @@ class RedditClient extends IRedditClient {
             ? HtmlUnescape().convert(event.selftext!)
             : null,
           videoUrl: event.isVideo ? event.data!["media"]["reddit_video"]["hls_url"] : null,
-          imageUrl: event.url.toString(),
+          imageUrl: RegExp(r".(gif|jpe?g|bmp|png)$").hasMatch(event.url.toString())
+            ? event.url.toString()
+            : null,
           upVotes: event.upvotes,
           downVotes: event.downvotes,
           upVotesRatio: event.upvoteRatio,
