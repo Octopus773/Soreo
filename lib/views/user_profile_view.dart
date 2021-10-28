@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/authentication/authentication_bloc.dart';
+import 'package:soreo/pages/search_page.dart';
 
 class UserProfileView extends StatelessWidget
 {
@@ -23,10 +24,16 @@ class UserProfileView extends StatelessWidget
             home: Scaffold(
                 appBar: AppBar(
                     title: const Text("Soreo"),
-                    actions: const [
+                    actions: [
                       Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(Icons.search)
+                          padding: const EdgeInsets.all(8),
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                builder: (_) => SearchPage(repository: context.read())
+                              )),
+                            child: const Icon(Icons.search)
+                          )
                       ),
                     ]
                 ),
@@ -64,7 +71,50 @@ class UserProfileView extends StatelessWidget
                               Navigator.of(context).pop();
                             }
                         )
-                      )
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Autoplay video"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Display NSFW"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Email on post reply"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Email on upvote"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Email on new follow"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Email on mention"),
+                          Switch(value: true, onChanged: (bool value) {  },)
+                        ]
+                      ),
                     ]
                 )
             )
