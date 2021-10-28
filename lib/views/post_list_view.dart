@@ -7,14 +7,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
-import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/post_page.dart';
-import 'package:soreo/pages/subreddit_page.dart';
+import 'package:soreo/views/post_view.dart';
 import 'package:soreo/views/sort_button_view.dart';
-import 'package:soreo/views/video_view.dart';
-import 'package:video_player/video_player.dart';
 
 class PostListView extends StatefulWidget {
   const PostListView({Key? key}) : super(key: key);
@@ -82,7 +78,14 @@ class _PostsListState extends State<PostListView> {
                     return const SortButtonView();
                   }
                   if (index < state.posts.length) {
-                    return _PostView(post: state.posts[index]);
+                    return GestureDetector(
+                      onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) => PostPage(post: state.posts[index])
+                          )
+                      ),
+                      child: PostView(post: state.posts[index])
+                    );
                   }
                   return const Center(
                     child: SizedBox(
@@ -95,72 +98,6 @@ class _PostsListState extends State<PostListView> {
               );
           }
       }
-    );
-  }
-}
-
-class _PostView extends StatelessWidget {
-  final Post post;
-
-  const _PostView({
-    required this.post,
-    Key? key
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => PostPage(post: post)
-            )
-        ),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: GestureDetector(
-                  child: const Icon(Icons.album),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => SubredditPage(subreddit: post.subReddit)
-                    )
-                  ),
-                ),
-                title: Text(post.title),
-                subtitle: Column(
-                  children: [
-                    MarkdownBody(data: post.text ?? "???"),
-                    if (post.imageUrl != null)
-                      Image.network(post.imageUrl!),
-                    if (post.videoUrl != null)
-                      VideoView(
-                        controller: VideoPlayerController.network(post.videoUrl!)
-                      )
-                  ]
-                )
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    child: const Icon(Icons.thumb_up_alt_rounded),
-                    onPressed: () {/* ... */},
-                  ),
-                  Text((post.upVotes - post.downVotes).toString()),
-                  TextButton(
-                    child: const Icon(Icons.thumb_down_alt_rounded),
-                    onPressed: () {/* ... */},
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
-            ],
-          ),
-        )
-      )
     );
   }
 }

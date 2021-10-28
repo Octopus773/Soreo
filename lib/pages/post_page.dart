@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
 import 'package:soreo/models/post.dart';
+import 'package:soreo/views/app_bar_view.dart';
 import 'package:soreo/views/post_view.dart';
 
 class PostPage extends StatelessWidget {
@@ -19,9 +20,15 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (ctx) => PostBloc(repository: ctx.read())..add(PostFetchRequestedEvent()),
-        child: PostView(post: post)
+    return MaterialApp(
+      title: "Soreo",
+      home: Scaffold(
+        appBar: AppBarView(),
+        body: BlocProvider(
+          create: (ctx) => PostBloc(repository: ctx.read())..add(PostFetchRequestedEvent()),
+          child: PostView(post: post)
+        )
+      )
     );
   }
 }

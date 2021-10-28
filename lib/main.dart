@@ -7,12 +7,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/pages/post_list_page.dart';
-import 'package:soreo/pages/search_page.dart';
-import 'package:soreo/pages/user_icon_page.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/post_repository.dart';
 import 'package:soreo/services/reddit_client.dart';
 import 'package:soreo/repositories/user_repository.dart';
+import 'package:soreo/views/app_bar_view.dart';
 
 import 'blocs/authentication/authentication_bloc.dart';
 
@@ -58,24 +57,7 @@ class SoreoApp extends StatelessWidget {
         child: MaterialApp(
           title: "Soreo",
           home: Scaffold(
-            appBar: AppBar(
-              title: const Text("Soreo"),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Builder(
-                    builder: (ctx) => GestureDetector(
-                      child: const Icon(Icons.search),
-                      onTap: () => Navigator.of(ctx)
-                        .push(MaterialPageRoute(
-                          builder: (_) => SearchPage(repository: ctx.read())
-                        )),
-                    )
-                  )
-                ),
-                const UserIconPage()
-              ]
-            ),
+            appBar: AppBarView(),
             body: const PostListPage()
           )
         )
