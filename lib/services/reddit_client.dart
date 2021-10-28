@@ -40,6 +40,7 @@ abstract class IRedditClient {
   Future subscribe(String subreddit);
   Future unsubscribe(String subreddit);
   Future<List<String>> searchSubreddit(String query);
+  Future<Subreddit> getSubreddit(String name);
 }
 
 
@@ -230,8 +231,13 @@ class RedditClient extends IRedditClient {
 
   @override
   Future<List<String>> searchSubreddit(String query) async {
-    return await _reddit.subreddits.search(query)
+    return (await _reddit.subreddits.searchByName(query))
       .map((x) => x.displayName)
       .toList();
+  }
+
+  @override
+  Future<Subreddit> getSubreddit(String name) async {
+    return convertFromReddit(await _reddit.subreddit(name).populate());
   }
 }

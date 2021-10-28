@@ -7,8 +7,11 @@
 import 'package:flappy_search_bar_ns/flappy_search_bar_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:soreo/models/subreddit.dart';
 import 'package:soreo/pages/subreddit_page.dart';
 import 'package:soreo/services/reddit_client.dart';
+
+import 'loading_page.dart';
 
 class SearchPage extends StatelessWidget {
   final IRedditClient repository;
@@ -31,8 +34,11 @@ class SearchPage extends StatelessWidget {
               title: Text(post!),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SubredditPage(subreddit: post!))
-                );
+                  builder: (context) => LoadingPage<Subreddit>(
+                    future: repository.getSubreddit(post),
+                    widget: (fullPost) => SubredditPage(subreddit: fullPost)
+                  )
+                ));
               },
             );
           },
