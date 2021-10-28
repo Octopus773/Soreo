@@ -14,6 +14,7 @@ import 'package:soreo/repositories/user_repository.dart';
 import 'package:soreo/views/app_bar_view.dart';
 
 import 'blocs/authentication/authentication_bloc.dart';
+import 'models/settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +22,13 @@ Future<void> main() async {
   final auth = AuthenticationRepository(reddit: reddit);
   final user = UserRepository(reddit: reddit);
   final posts = PostRepository(reddit: reddit);
+  final settings = await reddit.getSettings();
   runApp(SoreoApp(
     reddit: reddit,
     auth: auth,
     user: user,
-    posts: posts
+    posts: posts,
+    settings: settings
   ));
 }
 
@@ -34,13 +37,15 @@ class SoreoApp extends StatelessWidget {
   final UserRepository user;
   final PostRepository posts;
   final IRedditClient reddit;
+  final Settings settings;
 
   const SoreoApp({
     Key? key,
     required this.reddit,
     required this.auth,
     required this.user,
-    required this.posts
+    required this.posts,
+    required this.settings
   }) : super(key: key);
 
   @override
@@ -51,6 +56,7 @@ class SoreoApp extends StatelessWidget {
         RepositoryProvider.value(value: auth),
         RepositoryProvider.value(value: user),
         RepositoryProvider.value(value: posts),
+        RepositoryProvider.value(value: settings),
       ],
       child: BlocProvider(
         create: (ctx) => AuthenticationBloc(auth: ctx.read(), user: ctx.read()),

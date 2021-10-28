@@ -4,6 +4,8 @@
  * Copyright (c) 2021, Zoe Roux
  */
 
+import 'dart:convert';
+
 import 'package:draw/draw.dart' hide User, Subreddit;
 import 'package:draw/draw.dart' as draw;
 import 'package:flutter/services.dart';
@@ -11,10 +13,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:soreo/models/authentication_status.dart';
+import 'package:soreo/models/settings.dart';
 import 'package:soreo/models/subreddit.dart';
 import 'package:soreo/models/post.dart';
 import 'package:soreo/models/user.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 
 abstract class IRedditClient {
@@ -41,6 +45,8 @@ abstract class IRedditClient {
   Future unsubscribe(String subreddit);
   Future<List<String>> searchSubreddit(String query);
   Future<Subreddit> getSubreddit(String name);
+  Future<Settings> getSettings();
+  Future updateSettings(Settings settings);
 }
 
 
@@ -239,5 +245,59 @@ class RedditClient extends IRedditClient {
   @override
   Future<Subreddit> getSubreddit(String name) async {
     return convertFromReddit(await _reddit.subreddit(name).populate());
+  }
+
+  @override
+  Future<Settings> getSettings() async {
+    try {
+      await _reddit.auth.refresh();
+      http.Response ret = await http.get(
+        Uri.parse("https://oauth.reddit.com/api/v1/me/prefs"),
+        headers: {
+          "Authorization": "Bearer ${_reddit.auth.credentials.accessToken}",
+          "User-Agent": "soreo"
+        }
+      );
+      var obj = json.decode(ret.body);
+      return Settings(
+        autoplay: obj["video_autoplay"],
+        displayNsfw: obj["over_18"],
+        emailOnFollow: obj["email_user_new_follower"],
+        emailOnMention: obj["email_username_mention"],
+        emailOnReply: obj["email_post_reply"],
+        emailOnUpvote: obj["email_upvote_post"]
+      );
+    } catch(e) {
+      print(e);
+      return Settings(
+        autoplay: true,
+        displayNsfw: true,
+        emailOnUpvote: false,
+        emailOnReply: false,
+        emailOnMention: false,
+        emailOnFollow: false
+      );
+    }
+  }
+
+  @override
+  Future updateSettings(Settings settings) async {
+    await _reddit.auth.refresh();
+    http.Response ret = await http.patch(
+        Uri.parse("https://oauth.reddit.com/api/v1/me/prefs"),
+        body: json.encode({
+          "video_autoplay": settings.autoplay,
+          "over_18": settings.displayNsfw,
+          "email_user_new_follower": settings.emailOnFollow,
+          "email_username_mention": settings.emailOnMention,
+          "email_post_reply": settings.emailOnReply,
+          "email_upvote_post": settings.emailOnUpvote,
+        }),
+        headers: {
+          "Authorization": "Bearer ${_reddit.auth.credentials.accessToken}",
+          "User-Agent": "soreo"
+        }
+    );
+    print(ret.statusCode);
   }
 }

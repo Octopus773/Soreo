@@ -29,13 +29,13 @@ class SearchPage extends StatelessWidget {
             : [],
           placeHolder: const Center(child: Text("Type something to start searching.")),
           emptyWidget: const Text("No result found."),
-          onItemFound: (String? post, int index) {
+          onItemFound: (String? sub, int index) {
             return ListTile(
-              title: Text(post!),
+              title: Text(sub!),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => LoadingPage<Subreddit>(
-                    future: repository.getSubreddit(post),
+                    future: repository.getSubreddit(sub),
                     widget: (fullPost) => SubredditPage(subreddit: fullPost)
                   )
                 ));

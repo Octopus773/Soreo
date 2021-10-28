@@ -8,13 +8,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/authentication/authentication_bloc.dart';
+import 'package:soreo/models/settings.dart';
 import 'package:soreo/pages/search_page.dart';
+import 'package:soreo/services/reddit_client.dart';
 
-class UserProfileView extends StatelessWidget
-{
+class UserProfileView extends StatefulWidget {
   const UserProfileView({Key? key})
       : super(key: key);
 
+  @override
+  State<UserProfileView> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfileView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -77,42 +83,90 @@ class UserProfileView extends StatelessWidget
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Autoplay video"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().autoplay,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().autoplay = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Display NSFW"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().displayNsfw,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().displayNsfw = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Email on post reply"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().emailOnReply,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().emailOnReply = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Email on upvote"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().emailOnUpvote,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().emailOnUpvote = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Email on new follow"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().emailOnFollow,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().emailOnFollow = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Email on mention"),
-                          Switch(value: true, onChanged: (bool value) {  },)
+                          Switch(
+                            value: context.read<Settings>().emailOnMention,
+                            onChanged: (bool value) {
+                              setState(() {
+                                context.read<Settings>().emailOnMention = value;
+                                context.read<IRedditClient>().updateSettings(context.read<Settings>());
+                              });
+                            }
+                          )
                         ]
                       ),
                     ]
@@ -121,5 +175,4 @@ class UserProfileView extends StatelessWidget
         )
     );
   }
-
 }
