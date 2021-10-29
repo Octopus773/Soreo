@@ -60,7 +60,7 @@ class SubredditView extends StatelessWidget {
                   ),
                 ];
               },
-              body: const PostListView()
+              body: const PostListView(showSubreddit: false)
           )
           )
         )

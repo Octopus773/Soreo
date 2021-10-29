@@ -7,6 +7,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/subreddit_page.dart';
 import 'package:soreo/views/video_view.dart';
@@ -14,9 +15,11 @@ import 'package:video_player/video_player.dart';
 
 class PostView extends StatelessWidget {
   final Post post;
+  final bool showSubreddit;
 
   const PostView({
     required this.post,
+    this.showSubreddit = true,
     Key? key
   }) : super(key: key);
 
@@ -27,27 +30,32 @@ class PostView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: GestureDetector(
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: post.subReddit.iconImage != null
-                    ? NetworkImage(post.subReddit.iconImage!)
-                    : const AssetImage("profile.png") as ImageProvider<Object>
+            leading: showSubreddit
+              ? GestureDetector(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: post.subReddit.iconImage != null
+                        ? NetworkImage(post.subReddit.iconImage!)
+                        : const AssetImage("profile.png") as ImageProvider<Object>
+                      )
                   )
-              )
-            ),
-              onTap: () =>
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) =>
-                      SubredditPage(subreddit: post.subReddit)
+                ),
+                onTap: () =>
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => SubredditPage(subreddit: post.subReddit)
                     )
                  ),
-            ),
+                onLongPress: () => Fluttertoast.showToast(
+                  msg: post.subReddit.title,
+                  toastLength: Toast.LENGTH_SHORT
+                ),
+              )
+              : null,
             title: Text(post.title),
             subtitle: Column(
               children: [

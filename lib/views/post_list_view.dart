@@ -13,7 +13,9 @@ import 'package:soreo/views/post_view.dart';
 import 'package:soreo/views/sort_button_view.dart';
 
 class PostListView extends StatefulWidget {
-  const PostListView({Key? key}) : super(key: key);
+  final bool showSubreddit;
+
+  const PostListView({Key? key, this.showSubreddit = true}) : super(key: key);
 
   @override
   _PostsListState createState() => _PostsListState();
@@ -84,7 +86,10 @@ class _PostsListState extends State<PostListView> {
                               builder: (_) => PostPage(post: state.posts[index])
                           )
                       ),
-                      child: PostView(post: state.posts[index])
+                      child: PostView(
+                        post: state.posts[index],
+                        showSubreddit: widget.showSubreddit
+                      )
                     );
                   }
                   return const Center(

@@ -26,7 +26,7 @@ class PostPage extends StatelessWidget {
         appBar: AppBarView(),
         body: BlocProvider(
           create: (ctx) => PostBloc(repository: ctx.read())..add(PostFetchRequestedEvent()),
-          child: PostView(post: post)
+          child: SingleChildScrollView(child: PostView(post: post))
         )
       )
     );
