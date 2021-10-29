@@ -8,19 +8,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/posts/post_bloc.dart';
-import 'package:soreo/models/post.dart';
 import 'package:soreo/pages/post_page.dart';
+import 'package:soreo/views/post_view.dart';
 import 'package:soreo/views/sort_button_view.dart';
 
 class PostListView extends StatefulWidget {
-  const PostListView({Key? key}) : super(key: key);
+  final bool showSubreddit;
+
+  const PostListView({Key? key, this.showSubreddit = true}) : super(key: key);
 
   @override
   _PostsListState createState() => _PostsListState();
 }
 
 class _PostsListState extends State<PostListView> {
-  final _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
+  bool _scrollControllerIsFromContext = false;
 
 
   @override
@@ -32,9 +35,14 @@ class _PostsListState extends State<PostListView> {
   @override
   void dispose() {
     super.dispose();
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    disposeScrollController();
+  }
+
+  void disposeScrollController() {
+    _scrollController.removeListener(_onScroll);
+    if (!_scrollControllerIsFromContext) {
+      _scrollController.dispose();
+    }
   }
 
   void _onScroll() {
@@ -52,87 +60,49 @@ class _PostsListState extends State<PostListView> {
   Widget build(BuildContext context) {
     return BlocBuilder<PostBloc, PostState>(
         builder: (child, state) {
-        switch (state.status) {
-          case PostStatus.initial:
-            return const Center(child: CircularProgressIndicator());
-          case PostStatus.failure:
-            return const Center(child: Text("Failed to fetch posts."));
-          case PostStatus.success:
-            return Column(
-              children: [
-                const SortButtonView(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.posts.length + (state.hasReachedMax ? 0 : 1),
-                    controller: _scrollController,
-                    itemBuilder: (ctx, index) => index < state.posts.length
-                      ? _PostView(post: state.posts[index])
-                      : const Center(
-                          child: SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(strokeWidth: 1.5),
-                          ),
-                        )
-                  )
-                )
-              ]
-            );
-        }
+          ScrollController? ctxScroll = PrimaryScrollController.of(context);
+          if (_scrollController != ctxScroll && ctxScroll != null) {
+            disposeScrollController();
+            _scrollController = ctxScroll..addListener(_onScroll);
+            _scrollControllerIsFromContext = true;
+          }
+          switch (state.status) {
+            case PostStatus.initial:
+              return const Center(child: CircularProgressIndicator());
+            case PostStatus.failure:
+              return const Center(child: Text("Failed to fetch posts."));
+            case PostStatus.success:
+              return ListView.builder(
+                itemCount: state.posts.length + (state.hasReachedMax ? 1 : 2),
+                controller: _scrollController,
+                itemBuilder: (ctx, index) {
+                  if (index == 0) {
+                    return const SortButtonView();
+                  }
+                  if (index < state.posts.length) {
+                    return GestureDetector(
+                      onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) => PostPage(post: state.posts[index])
+                          )
+                      ),
+                      child: PostView(
+                        post: state.posts[index],
+                        showSubreddit: widget.showSubreddit
+                      )
+                    );
+                  }
+                  return const Center(
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(strokeWidth: 1.5),
+                    )
+                  );
+                }
+              );
+          }
       }
-    );
-  }
-}
-
-class _PostView extends StatelessWidget {
-  final Post post;
-
-  const _PostView({
-    required this.post,
-    Key? key
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => PostPage(post: post)
-            )
-        ),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.album),
-                title: Text(post.title),
-                subtitle: Text(post.text as String),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    child: const Icon(Icons.thumb_up_alt_rounded),
-                    onPressed: () {/* ... */},
-                  ),
-                  Text((post.upVotes - post.downVotes).toString()),
-                  TextButton(
-                    child: const Icon(Icons.thumb_down_alt_rounded),
-                    onPressed: () {/* ... */},
-                  ),
-                  TextButton(
-                    child: const Icon(Icons.comment),
-                    onPressed: () {/* ... */},
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
-            ],
-          ),
-        )
-      )
     );
   }
 }

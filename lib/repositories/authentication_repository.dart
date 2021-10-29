@@ -12,6 +12,7 @@ import 'package:soreo/services/reddit_client.dart';
 class AuthenticationRepository {
   final IRedditClient reddit;
   final _stateStream = StreamController<AuthenticationStatus>();
+  Stream<AuthenticationStatus>? _broadcastStream;
 
   /// Create a new [AuthenticationRepository] using the given reddit instance.
   AuthenticationRepository({
@@ -24,7 +25,8 @@ class AuthenticationRepository {
   /// An updated stream with the user's connection status.
   Stream<AuthenticationStatus> get status async*
   {
-    yield *_stateStream.stream;
+    _broadcastStream ??= _stateStream.stream.asBroadcastStream();
+    yield *_broadcastStream!;
   }
 
   /// Open a login page and retrieve an authorization code. If the user

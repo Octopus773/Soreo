@@ -14,10 +14,13 @@ import 'package:soreo/repositories/user_repository.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
+/// The [Bloc] used to handle authentication states. If the user is
+/// authenticated, this bloc will also inform who the user is.
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository auth;
   final UserRepository user;
 
+  /// Create a new [AuthenticationBloc].
   AuthenticationBloc({
     required this.auth,
     required this.user
@@ -44,6 +47,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         break;
       case AuthenticationStatus.unauthenticated:
         emit(const AuthenticationState.unauthenticated());
+        break;
     }
   }
 }

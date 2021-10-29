@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/blocs/authentication/authentication_bloc.dart';
 import 'package:soreo/models/authentication_status.dart';
+import 'package:soreo/pages/user_profile_page.dart';
 
 class UserIconView extends StatelessWidget
 {
@@ -22,13 +23,16 @@ class UserIconView extends StatelessWidget
       builder: (child, state) => Padding(
           padding: const EdgeInsets.only(right: 20),
           child: GestureDetector(
-            onTap: () => context
-              .read<AuthenticationBloc>()
-              .add(
-                state.status == AuthenticationStatus.unauthenticated
-                  ? AuthenticationLoginRequested()
-                  : AuthenticationLogoutRequested()
-                ),
+            onTap: () {
+              if (state.status == AuthenticationStatus.unauthenticated) {
+                context.read<AuthenticationBloc>()
+                  .add(AuthenticationLoginRequested());
+                return;
+              }
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => const UserProfilePage())
+              );
+            },
             child: state.user.iconUrl != null
               ? Image.network(state.user.iconUrl!)
               : const Icon(Icons.account_circle)

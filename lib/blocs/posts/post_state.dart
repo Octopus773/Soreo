@@ -1,15 +1,23 @@
 part of 'post_bloc.dart';
 
+/// Has the post been loaded and if yes successfully?
 enum PostStatus { initial, success, failure }
 
+/// The state of loaded posts.
 @immutable
 class PostState extends Equatable {
+  /// Has the post been loaded and if yes successfully?
   final PostStatus status;
+  /// The list of loaded posts.
   final List<Post> posts;
+  /// Has the end of the subreddit been reached?
   final bool hasReachedMax;
+  /// The sort method used.
   final PostSort sortBy;
+  /// Since when the sort are sorted (all time, one week...)
   final PostSortSince sortSince;
 
+  /// Create a new [PostState].
   const PostState({
     this.status = PostStatus.initial,
     this.posts = const <Post>[],
@@ -18,6 +26,7 @@ class PostState extends Equatable {
     this.sortSince = PostSortSince.none
   });
 
+  /// Create a new [PostState] based on the current instance.
   PostState copyWith({
     PostStatus? status,
     List<Post>? posts,

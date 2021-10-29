@@ -11,7 +11,10 @@ class Subreddit extends Equatable {
   final String title;
   final String fullName;
   final String? description;
-  final Uri? iconImage;
+  final String? iconImage;
+  final String? bannerImage;
+  final int? subscriberCount;
+  final int? activeUserCount;
   final bool over18;
 
 
@@ -21,9 +24,12 @@ class Subreddit extends Equatable {
     required this.description,
     required this.fullName,
     required this.iconImage,
+    required this.bannerImage,
+    required this.subscriberCount,
+    required this.activeUserCount,
     required this.over18
   });
 
   @override
-  List<Object?> get props => [id, title, description, fullName, iconImage, over18];
+  List<Object?> get props => [id, title, description, fullName, iconImage, bannerImage, over18, subscriberCount, activeUserCount];
 }

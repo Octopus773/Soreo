@@ -7,55 +7,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soreo/pages/post_list_page.dart';
-import 'package:soreo/pages/user_icon_page.dart';
 import 'package:soreo/repositories/authentication_repository.dart';
 import 'package:soreo/repositories/post_repository.dart';
 import 'package:soreo/services/reddit_client.dart';
 import 'package:soreo/repositories/user_repository.dart';
+import 'package:soreo/views/app_bar_view.dart';
 
+import 'blocs/authentication/authentication_bloc.dart';
+import 'models/settings.dart';
+
+/// The main entrypoint of the program.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   IRedditClient reddit = await RedditClient.newInstance();
   final auth = AuthenticationRepository(reddit: reddit);
   final user = UserRepository(reddit: reddit);
   final posts = PostRepository(reddit: reddit);
+  final settings = await reddit.getSettings();
   runApp(SoreoApp(
+    reddit: reddit,
     auth: auth,
     user: user,
-    posts: posts
+    posts: posts,
+    settings: settings
   ));
 }
 
+/// The main widget of soreo.
 class SoreoApp extends StatelessWidget {
   final AuthenticationRepository auth;
   final UserRepository user;
   final PostRepository posts;
+  final IRedditClient reddit;
+  final Settings settings;
 
+  /// Create a new [SoreoApp].
   const SoreoApp({
     Key? key,
+    required this.reddit,
     required this.auth,
     required this.user,
-    required this.posts
+    required this.posts,
+    required this.settings
   }) : super(key: key);
 
+  /// Build the UI of Soreo.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider.value(value: reddit),
         RepositoryProvider.value(value: auth),
         RepositoryProvider.value(value: user),
         RepositoryProvider.value(value: posts),
+        RepositoryProvider.value(value: settings),
       ],
-      child: MaterialApp(
-        title: "Soreo",
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Soreo"),
-            actions: const [
-              UserIconPage()
-            ]
-          ),
-          body: const PostListPage()
+      child: BlocProvider(
+        create: (ctx) => AuthenticationBloc(auth: ctx.read(), user: ctx.read()),
+        child: MaterialApp(
+          title: "Soreo",
+          home: Scaffold(
+            appBar: AppBarView(),
+            body: const PostListPage()
+          )
         )
       )
     );

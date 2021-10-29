@@ -16,9 +16,6 @@ class UserIconPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (ctx) => AuthenticationBloc(auth: ctx.read(), user: ctx.read()),
-      child: const UserIconView()
-    );
+    return const UserIconView();
   }
 }

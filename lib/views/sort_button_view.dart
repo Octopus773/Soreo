@@ -19,7 +19,7 @@ class SortButtonView extends StatelessWidget {
     return BlocBuilder<PostBloc, PostState>(
       builder: (ctx, state) {
         return ElevatedButton(
-          child: Text("Sort by ${state.sortBy} since ${state.sortSince}"),
+          child: Text("Sorting by ${state.sortBy.toString().split('.')[1]}"),
           onPressed: () {
             showModalBottomSheet<void>(
               context: context,
@@ -27,7 +27,7 @@ class SortButtonView extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: PostSort.values.map((e) => ListTile(
-                    title: Text("$e"),
+                    title: Text("Sort by: ${e.toString().split('.')[1]}"),
                     onTap: () {
                       ctx.read<PostBloc>().add(PostSortChangedEvent(sortBy: e));
                       Navigator.pop(context);

@@ -13,11 +13,20 @@ import 'package:soreo/repositories/post_repository.dart';
 part 'post_event.dart';
 part 'post_state.dart';
 
+/// The [Bloc] that handles post loading and sorting.
 class PostBloc extends Bloc<PostEvent, PostState> {
+  /// The repository used to retrieve posts.
   final PostRepository repository;
+  /// The specific subreddit to retrieve post for. If this is null, search
+  /// for the homepage.
+  final String? subreddit;
   bool _fetching = false;
 
-  PostBloc({required this.repository}) : super(const PostState()) {
+  /// Create a new [PostBloc].
+  PostBloc({
+    required this.repository,
+    this.subreddit
+  }) : super(const PostState()) {
     on<PostFetchRequestedEvent>((event, emit) async {
       if (state.hasReachedMax || _fetching) {
         return;
@@ -25,6 +34,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       try {
         _fetching = true;
         List<Post> posts = await repository.getPosts(
+          subreddit: subreddit,
           sortBy: state.sortBy,
           since: state.sortSince,
           after: state.posts.isNotEmpty
@@ -32,9 +42,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
             : null
         );
         emit(state.copyWith(
-            posts: List.of(state.posts)..addAll(posts),
-            status: PostStatus.success,
-            hasReachedMax: posts.isEmpty
+          posts: List.of(state.posts)..addAll(posts),
+          status: PostStatus.success,
+          hasReachedMax: posts.isEmpty
         ));
       } catch(e) {
         print(e);
