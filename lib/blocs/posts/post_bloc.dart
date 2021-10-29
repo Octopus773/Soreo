@@ -13,11 +13,16 @@ import 'package:soreo/repositories/post_repository.dart';
 part 'post_event.dart';
 part 'post_state.dart';
 
+/// The [Bloc] that handles post loading and sorting.
 class PostBloc extends Bloc<PostEvent, PostState> {
+  /// The repository used to retrieve posts.
   final PostRepository repository;
+  /// The specific subreddit to retrieve post for. If this is null, search
+  /// for the homepage.
   final String? subreddit;
   bool _fetching = false;
 
+  /// Create a new [PostBloc].
   PostBloc({
     required this.repository,
     this.subreddit

@@ -7,6 +7,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:soreo/models/subreddit.dart';
 
+/// How should posts be sorted?
 enum PostSort {
   hot,
   rising,
@@ -16,6 +17,7 @@ enum PostSort {
   top
 }
 
+/// Since when should the sort be applied?
 enum PostSortSince {
   none,
   hour,
@@ -26,6 +28,7 @@ enum PostSortSince {
   all
 }
 
+/// A post/submission on reddit.
 class Post extends Equatable {
   final String id;
   final String title;
@@ -38,6 +41,7 @@ class Post extends Equatable {
   final String? imageUrl;
 
 
+  /// Create a new [Post].
   const Post({
     required this.id,
     required this.title,

@@ -16,6 +16,7 @@ import 'package:soreo/views/app_bar_view.dart';
 import 'blocs/authentication/authentication_bloc.dart';
 import 'models/settings.dart';
 
+/// The main entrypoint of the program.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   IRedditClient reddit = await RedditClient.newInstance();
@@ -32,6 +33,7 @@ Future<void> main() async {
   ));
 }
 
+/// The main widget of soreo.
 class SoreoApp extends StatelessWidget {
   final AuthenticationRepository auth;
   final UserRepository user;
@@ -39,6 +41,7 @@ class SoreoApp extends StatelessWidget {
   final IRedditClient reddit;
   final Settings settings;
 
+  /// Create a new [SoreoApp].
   const SoreoApp({
     Key? key,
     required this.reddit,
@@ -48,6 +51,7 @@ class SoreoApp extends StatelessWidget {
     required this.settings
   }) : super(key: key);
 
+  /// Build the UI of Soreo.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(

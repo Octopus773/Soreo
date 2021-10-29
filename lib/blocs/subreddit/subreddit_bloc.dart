@@ -6,10 +6,12 @@ import 'package:soreo/services/reddit_client.dart';
 part 'subreddit_event.dart';
 part 'subreddit_state.dart';
 
+/// The [Bloc] used to register and unsubscribe to subreddits.
 class SubredditBloc extends Bloc<SubredditEvent, SubredditState> {
   final IRedditClient repository;
   final String subreddit;
 
+  /// Create a new [SubredditBloc].
   SubredditBloc({
     required this.subreddit,
     required this.repository
