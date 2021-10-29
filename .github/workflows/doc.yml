@@ -1,0 +1,31 @@
+name: Update the documentation
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Building:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+      - name: Download dartdoc
+        run: pub global activate dartdoc
+      - name: Update the docs
+        run: |
+          rm -rf doc/*
+          dartdoc
+          cd doc/api
+          git config --global user.email "${GITHUB_ACTOR}@github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git init
+          git add -A
+          git commit -m "Deploying the documentation"
+          git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${GITHUB_REPO}
+          git checkout -b gh-pages
+          git push --force origin gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: "github.com/Octopus773/Soreo"
