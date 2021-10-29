@@ -13,7 +13,6 @@ enum PostSort {
   rising,
   controversial,
   news,
-  best,
   top
 }
 

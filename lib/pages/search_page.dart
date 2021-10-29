@@ -31,11 +31,11 @@ class SearchPage extends StatelessWidget {
           emptyWidget: const Text("No result found."),
           onItemFound: (String? sub, int index) {
             return ListTile(
-              title: Text(sub!),
+              title: Text("r/$sub"),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => LoadingPage<Subreddit>(
-                    future: repository.getSubreddit(sub),
+                    future: repository.getSubreddit(sub!),
                     widget: (fullPost) => SubredditPage(subreddit: fullPost)
                   )
                 ));
