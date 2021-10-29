@@ -28,7 +28,18 @@ class PostView extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: GestureDetector(
-              child: const Icon(Icons.album),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: post.subReddit.iconImage != null
+                    ? NetworkImage(post.subReddit.iconImage!)
+                    : const AssetImage("profile.png") as ImageProvider<Object>
+                  )
+              )
+            ),
               onTap: () =>
                 Navigator.of(context).push(
                   MaterialPageRoute(

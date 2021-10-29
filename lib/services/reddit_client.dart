@@ -153,6 +153,7 @@ class RedditClient extends IRedditClient {
     };
 
   String? nullIfEmpty(String? str) => str?.isEmpty == true ? null : str;
+  Uri? nullIfEmptyUri(Uri? str) => str?.hasEmptyPath == true ? null : str;
 
   Subreddit convertFromReddit(draw.Subreddit sub) {
     String? banner = nullIfEmpty(sub.data?["mobile_banner_image"])
@@ -163,7 +164,7 @@ class RedditClient extends IRedditClient {
       description: sub.data?["public_description"],
       title: sub.displayName,
       fullName: sub.displayName,
-      iconImage: sub.iconImage != null ? HtmlUnescape().convert(sub.iconImage.toString()) : null,
+      iconImage: nullIfEmptyUri(sub.iconImage) != null ? HtmlUnescape().convert(sub.iconImage.toString()) : null,
       bannerImage: banner != null ? HtmlUnescape().convert(banner) : null,
       over18: sub.over18,
       subscriberCount: sub.data?["subscribers"],

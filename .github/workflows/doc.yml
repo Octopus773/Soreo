@@ -3,7 +3,7 @@ name: Update the documentation
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   Building:
