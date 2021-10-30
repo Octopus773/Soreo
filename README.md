@@ -7,6 +7,8 @@
 
 Soreo is a modern Reddit client, with an minimalist UI
 
+Main git repo [repo](https://github.com/Octopus773/Soreo)
+
 ## Screenshots
 
 Post list                                             |  Profile view
