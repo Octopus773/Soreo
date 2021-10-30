@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AuthenticationBloc class from the authentication_bloc library, for the Dart programming language.">
+  <title>AuthenticationBloc class - authentication_bloc library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">soreo</a></li>
+    <li><a href="../blocs_authentication_authentication_bloc/blocs_authentication_authentication_bloc-library.html">authentication_bloc</a></li>
+    <li class="self-crumb">AuthenticationBloc class</li>
+  </ol>
+  <div class="self-name">AuthenticationBloc</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">AuthenticationBloc</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>The <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> used to handle authentication states. If the user is
+authenticated, this bloc will also inform who the user is.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></li>
+          <li><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase-class.html">BlocBase</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></li>
+          <li><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></li>
+          <li>AuthenticationBloc</li>
+        </ul></dd>
+
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="AuthenticationBloc" class="callable">
+          <span class="name"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/AuthenticationBloc.html">AuthenticationBloc</a></span><span class="signature">(<span class="parameter" id="-param-auth">{<span>required</span> <span class="type-annotation"><a href="../repositories_authentication_repository/AuthenticationRepository-class.html">AuthenticationRepository</a></span> <span class="parameter-name">auth</span>, </span><span class="parameter" id="-param-user"><span>required</span> <span class="type-annotation"><a href="../repositories_user_repository/UserRepository-class.html">UserRepository</a></span> <span class="parameter-name">user</span>}</span>)</span>
+        </dt>
+        <dd>
+          Create a new <a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html">AuthenticationBloc</a>. 
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="auth" class="property">
+  <span class="name"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/auth.html">auth</a></span>
+  <span class="signature">&#8594; <a href="../repositories_authentication_repository/AuthenticationRepository-class.html">AuthenticationRepository</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="isClosed" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/isClosed.html">isClosed</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd class="inherited">
+  Whether the bloc is closed. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/isClosed.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="state" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/state.html">state</a></span>
+  <span class="signature">&#8594; <a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span> 
+
+</dt>
+<dd class="inherited">
+  The current <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/state.html">state</a>. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="stream" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/stream.html">stream</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span> 
+
+</dt>
+<dd class="inherited">
+  The current state stream. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="user" class="property">
+  <span class="name"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/user.html">user</a></span>
+  <span class="signature">&#8594; <a href="../repositories_user_repository/UserRepository-class.html">UserRepository</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">final</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="add" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/add.html">add</a></span><span class="signature">(<wbr><span class="parameter" id="add-param-event"><span class="type-annotation"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span> <span class="parameter-name">event</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Notifies the <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> of a new <code>event</code> which triggers
+all corresponding <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/EventHandler.html">EventHandler</a> instances.
+If <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/close.html">close</a> has already been called, any subsequent calls to <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/add.html">add</a> will
+be ignored and will not result in any subsequent state changes. 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="addError" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/addError.html">addError</a></span><span class="signature">(<wbr><span class="parameter" id="addError-param-error"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">error</span>, </span><span class="parameter" id="addError-param-stackTrace">[<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Reports an <code>error</code> which triggers <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onError.html">onError</a> with an optional <a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a>. 
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, inherited</div>
+
+</dd>
+
+        <dt id="close" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/close.html">close</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Closes the <code>event</code> and <code>state</code> <code>Streams</code>.
+This method should be called when a <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> is no longer needed.
+Once <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/close.html">close</a> is called, <code>events</code> that are <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/add.html">add</a>ed will not be
+processed.
+In addition, if <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/close.html">close</a> is called while <code>events</code> are still being
+processed, the <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> will finish processing the pending <code>events</code>. 
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, inherited</div>
+
+</dd>
+
+        <dt id="emit" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/emit.html">emit</a></span><span class="signature">(<wbr><span class="parameter" id="emit-param-state"><span class="type-annotation"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span> <span class="parameter-name">state</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  <strong><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/emit.html">emit</a> should never be used outside of tests.</strong> <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/emit.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/visibleForTesting-constant.html">visibleForTesting</a>, inherited</div>
+
+</dd>
+
+        <dt id="listen" class="callable inherited">
+  <span class="name deprecated"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/listen.html">listen</a></span><span class="signature">(<wbr><span class="parameter" id="listen-param-onData"><span class="type-annotation">void</span> <span class="parameter-name">onData</span>(<span class="parameter" id="param-"><span class="type-annotation"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span></span>)?, </span><span class="parameter" id="listen-param-onError">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a>?</span> <span class="parameter-name">onError</span>, </span><span class="parameter" id="listen-param-onDone"><span class="type-annotation">void</span> <span class="parameter-name">onDone</span>()?, </span><span class="parameter" id="listen-param-cancelOnError"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">cancelOnError</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/StreamSubscription-class.html">StreamSubscription</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds a subscription to the <code>Stream&lt;State&gt;</code>.
+Returns a <a href="https://api.flutter.dev/flutter/dart-async/StreamSubscription-class.html">StreamSubscription</a> which handles events from
+the <code>Stream&lt;State&gt;</code> using the provided <code>onData</code>, <code>onError</code> and <code>onDone</code>
+handlers. 
+  <div class="features">@<a href="https://api.flutter.dev/flutter/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use stream.listen instead. Will be removed in v8.0.0&#39;), inherited</div>
+
+</dd>
+
+        <dt id="mapEventToState" class="callable inherited">
+  <span class="name deprecated"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/mapEventToState.html">mapEventToState</a></span><span class="signature">(<wbr><span class="parameter" id="mapEventToState-param-event"><span class="type-annotation"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span> <span class="parameter-name">event</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  <strong>@Deprecated - Use on<event> instead. Will be removed in v8.0.0</event></strong> <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/mapEventToState.html">[...]</a>
+  <div class="features">@<a href="https://api.flutter.dev/flutter/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use on&lt;Event&gt; instead. Will be removed in v8.0.0&#39;), inherited</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="on" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/on.html">on</a></span><span class="signature">&lt;<wbr><span class="type-parameter">E extends Event</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="on-param-handler"><span class="type-annotation"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/EventHandler.html">EventHandler</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span> <span class="parameter-name">handler</span>, </span><span class="parameter" id="on-param-transformer">{<span class="type-annotation"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/EventTransformer.html">EventTransformer</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span>?</span> <span class="parameter-name">transformer</span>}</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Register event handler for an event of type <code>E</code>.
+There should only ever be one event handler per event type <code>E</code>. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/on.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="onChange" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onChange.html">onChange</a></span><span class="signature">(<wbr><span class="parameter" id="onChange-param-change"><span class="type-annotation"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Change-class.html">Change</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span> <span class="parameter-name">change</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Called whenever a <code>change</code> occurs with the given <code>change</code>.
+A <code>change</code> occurs when a new <code>state</code> is emitted.
+<a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onChange.html">onChange</a> is called before the <code>state</code> of the <code>cubit</code> is updated.
+<a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onChange.html">onChange</a> is a great spot to add logging/analytics for a specific <code>cubit</code>. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onChange.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, inherited</div>
+
+</dd>
+
+        <dt id="onError" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onError.html">onError</a></span><span class="signature">(<wbr><span class="parameter" id="onError-param-error"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">error</span>, </span><span class="parameter" id="onError-param-stackTrace"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a></span> <span class="parameter-name">stackTrace</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Called whenever an <code>error</code> occurs and notifies <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocObserver/onError.html">BlocObserver.onError</a>. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onError.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, @<a href="https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.html">protected</a>, inherited</div>
+
+</dd>
+
+        <dt id="onEvent" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onEvent.html">onEvent</a></span><span class="signature">(<wbr><span class="parameter" id="onEvent-param-event"><span class="type-annotation"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span> <span class="parameter-name">event</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Called whenever an <code>event</code> is <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/add.html">add</a>ed to the <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a>.
+A great spot to add logging/analytics at the individual <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> level. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onEvent.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, @<a href="https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.html">protected</a>, inherited</div>
+
+</dd>
+
+        <dt id="onTransition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onTransition.html">onTransition</a></span><span class="signature">(<wbr><span class="parameter" id="onTransition-param-transition"><span class="type-annotation"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Transition-class.html">Transition</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span> <span class="parameter-name">transition</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Called whenever a <code>transition</code> occurs with the given <code>transition</code>.
+A <code>transition</code> occurs when a new <code>event</code> is added
+and a new state is <code>emitted</code> from a corresponding <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/EventHandler.html">EventHandler</a>.
+executed.
+<a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onTransition.html">onTransition</a> is called before a <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a>'s <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/state.html">state</a> has been updated.
+A great spot to add logging/analytics at the individual <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc-class.html">Bloc</a> level. <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onTransition.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-constant.html">mustCallSuper</a>, @<a href="https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.html">protected</a>, inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="transformEvents" class="callable inherited">
+  <span class="name deprecated"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformEvents.html">transformEvents</a></span><span class="signature">(<wbr><span class="parameter" id="transformEvents-param-events"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>&gt;</span></span> <span class="parameter-name">events</span>, </span><span class="parameter" id="transformEvents-param-transitionFn"><span class="type-annotation"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/TransitionFunction.html">TransitionFunction</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span> <span class="parameter-name">transitionFn</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Transition-class.html">Transition</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  <strong>@Deprecated - Use <code>on&lt;Event&gt;</code> with an <code>EventTransformer</code> instead.
+Will be removed in v8.0.0</strong> <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformEvents.html">[...]</a>
+  <div class="features">@<a href="https://api.flutter.dev/flutter/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use `on&lt;Event&gt;` with an `EventTransformer` instead. &#39; &#39;Will be removed in v8.0.0&#39;), inherited</div>
+
+</dd>
+
+        <dt id="transformTransitions" class="callable inherited">
+  <span class="name deprecated"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformTransitions.html">transformTransitions</a></span><span class="signature">(<wbr><span class="parameter" id="transformTransitions-param-transitions"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Transition-class.html">Transition</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">transitions</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Transition-class.html">Transition</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></span>, <span class="type-parameter"><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  <strong>@Deprecated - Override <code>Stream&lt;State&gt; get stream</code> instead.
+Will be removed in v8.0.0</strong> <a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformTransitions.html">[...]</a>
+  <div class="features">@<a href="https://api.flutter.dev/flutter/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Override `Stream&lt;State&gt; get stream` instead. Will be removed in v8.0.0&#39;), inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">soreo</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/blocs_authentication_authentication_bloc-library.html">authentication_bloc</a></li>
+  <li class="self-crumb">AuthenticationBloc class</li>
+</ol>
+
+
+    <h5>authentication_bloc library</h5>
+    <ol>
+  <li class="section-title"><a href="../blocs_authentication_authentication_bloc/blocs_authentication_authentication_bloc-library.html#classes">Classes</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html">AuthenticationBloc</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationEvent-class.html">AuthenticationEvent</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationLoginRequested-class.html">AuthenticationLoginRequested</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationLogoutRequested-class.html">AuthenticationLogoutRequested</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationState-class.html">AuthenticationState</a></li>
+  <li><a href="../blocs_authentication_authentication_bloc/AuthenticationStatusChanged-class.html">AuthenticationStatusChanged</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+    <li class="section-title"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html#constructors">Constructors</a></li>
+    <li><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/AuthenticationBloc.html">AuthenticationBloc</a></li>
+
+
+    <li class="section-title">
+      <a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/auth.html">auth</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/isClosed.html">isClosed</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/state.html">state</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/stream.html">stream</a></li>
+    <li><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc/user.html">user</a></li>
+
+    <li class="section-title"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/add.html">add</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/addError.html">addError</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/close.html">close</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/emit.html">emit</a></li>
+    <li class="inherited"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/listen.html">listen</a></li>
+    <li class="inherited"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/mapEventToState.html">mapEventToState</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/on.html">on</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onChange.html">onChange</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/BlocBase/onError.html">onError</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onEvent.html">onEvent</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/onTransition.html">onTransition</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformEvents.html">transformEvents</a></li>
+    <li class="inherited"><a class="deprecated" href="https://pub.dev/documentation/bloc/7.2.1/bloc/Bloc/transformTransitions.html">transformTransitions</a></li>
+
+    <li class="section-title inherited"><a href="../blocs_authentication_authentication_bloc/AuthenticationBloc-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    soreo
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
