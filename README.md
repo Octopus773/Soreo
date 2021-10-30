@@ -5,12 +5,20 @@
 
 # Soreo
 
-Soreo is a modern Reddit client, with an handsome UI
+Soreo is a modern Reddit client, with an minimalist UI
 
 
 ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+Post list
+![App Screenshot](assets/ScreenShots/posts_list.jpg)
+Profile view
+![App Screenshot](assets/ScreenShots/profile_view.jpg)
+Search view
+![App Screenshot](assets/ScreenShots/search_view.jpg)
+Subreddit view
+![App Screenshot](assets/ScreenShots/subreddit_view.jpg)
+Post view
+![App Screenshot](assets/ScreenShots/post_view.jpg)
 
 
 ## Documentation
@@ -20,7 +28,7 @@ Soreo is a modern Reddit client, with an handsome UI
 
 ## Tech Stack
 
-Dart (Flutter), BLoC
+Dart (Flutter), BLoC, Material UI
 
 ## Authors
 
