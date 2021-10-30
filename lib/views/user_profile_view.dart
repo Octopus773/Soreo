@@ -27,6 +27,7 @@ class _UserProfileState extends State<UserProfileView> {
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (child, state) => MaterialApp(
             title: "Soreo",
+            theme: context.read(),
             home: Scaffold(
                 appBar: AppBar(
                     title: const Text("Soreo"),

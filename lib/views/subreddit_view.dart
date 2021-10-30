@@ -29,6 +29,7 @@ class SubredditView extends StatelessWidget {
       child:
         MaterialApp(
           title: "Soreo",
+          theme: context.read(),
           home: Scaffold(
             body: NestedScrollView(
               floatHeaderSlivers: true,

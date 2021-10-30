@@ -22,6 +22,7 @@ class PostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Soreo",
+      theme: context.read(),
       home: Scaffold(
         appBar: AppBarView(),
         body: BlocProvider(
