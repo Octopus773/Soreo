@@ -1,13 +1,11 @@
-
-![Logo](assets/logo.png)
+<p align="center">
+  <img src="./assets/logo.png" width="200">
+  </p>
 
 
 # Soreo
 
 Soreo is a modern Reddit client, with an handsome UI
-
-## Demo
-
 
 
 ## Screenshots
