@@ -16,9 +16,10 @@ Post list                                             |  Profile view
 Search view                                           |  Subreddit view
 ------------------------------------------------------|---------------------------------------------------------
 ![App Screenshot](assets/ScreenShots/search_view.jpg) |  ![App Screenshot](assets/ScreenShots/subreddit_view.jpg)
-Post view                                             |  
+
+Post view                                             |  r/europe
 :----------------------------------------------------:|:-------------------------------------------------------:
-![App Screenshot](assets/ScreenShots/post_view.jpg)   |  
+![App Screenshot](assets/ScreenShots/post_view.jpg)   |  ![App Screenshot](assets/ScreenShots/eu_subreddit_view.jpg)
 
 ## Documentation
 
