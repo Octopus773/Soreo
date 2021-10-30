@@ -36,7 +36,7 @@ class SubredditView extends StatelessWidget {
                 return <Widget>[
                   SliverAppBar(
                     title: Text("r/${subreddit.fullName} - Soreo"),
-                    expandedHeight: 275.0,
+                    expandedHeight: 320.0,
                     pinned: true,
                     floating: false,
                     forceElevated: innerBoxIsScrolled,
@@ -48,8 +48,8 @@ class SubredditView extends StatelessWidget {
                               Image.network(subreddit.bannerImage!, fit: BoxFit.cover, height: 200, width: double.infinity)
                             else
                               const SizedBox(height: 200),
-                            Text(subreddit.description ?? ""),
-                            Text("${subreddit.subscriberCount} members - ${subreddit.activeUserCount} online"),
+                            Text(subreddit.description ?? "", textAlign: TextAlign.center, maxLines: 4, overflow: TextOverflow.ellipsis),
+                            Text("${subreddit.subscriberCount} members - ${subreddit.activeUserCount} online", textAlign: TextAlign.center),
                             const SubscribeButtonView()
                           ]
                         )

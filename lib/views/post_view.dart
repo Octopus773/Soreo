@@ -8,7 +8,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/src/provider.dart';
 import 'package:soreo/models/post.dart';
+import 'package:soreo/models/settings.dart';
 import 'package:soreo/pages/subreddit_page.dart';
 import 'package:soreo/views/video_view.dart';
 import 'package:video_player/video_player.dart';
@@ -56,7 +58,10 @@ class PostView extends StatelessWidget {
                 ),
               )
               : null,
-            title: Text(post.title),
+            title: Padding(
+              child: Text(post.title),
+              padding: const EdgeInsets.only(bottom: 20)
+            ),
             subtitle: Column(
               children: [
                 MarkdownBody(data: post.text ?? "???"),
@@ -64,6 +69,7 @@ class PostView extends StatelessWidget {
                   Image.network(post.imageUrl!),
                 if (post.videoUrl != null)
                   VideoView(
+                    autoplay: context.read<Settings>().autoplay,
                     controller: VideoPlayerController.network(
                       post.videoUrl!)
                     )

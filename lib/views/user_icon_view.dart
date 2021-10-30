@@ -34,7 +34,10 @@ class UserIconView extends StatelessWidget
               );
             },
             child: state.user.iconUrl != null
-              ? Image.network(state.user.iconUrl!)
+              ? Padding(
+                padding: const EdgeInsets.all(8),
+                child: Image.network(state.user.iconUrl!)
+              )
               : const Icon(Icons.account_circle)
           )
         )
