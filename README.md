@@ -7,19 +7,18 @@
 
 Soreo is a modern Reddit client, with an minimalist UI
 
-
 ## Screenshots
-Post list
-![App Screenshot](assets/ScreenShots/posts_list.png)
-Profile view
-![App Screenshot](assets/ScreenShots/profile_view.png)
-Search view
-![App Screenshot](assets/ScreenShots/search_view.png)
-Subreddit view
-![App Screenshot](assets/ScreenShots/subreddit_view.png)
-Post view
-![App Screenshot](assets/ScreenShots/post_view.png)
 
+Post list                                             |  Profile view
+:----------------------------------------------------:|:-------------------------------------------------------:
+![App Screenshot](assets/ScreenShots/posts_list.png)  |  ![App Screenshot](assets/ScreenShots/profile_view.png)
+
+Search view                                           |  Subreddit view
+------------------------------------------------------|---------------------------------------------------------
+![App Screenshot](assets/ScreenShots/search_view.png) |  ![App Screenshot](assets/ScreenShots/subreddit_view.png)
+Post view                                             |  
+:----------------------------------------------------:|:-------------------------------------------------------:
+![App Screenshot](assets/ScreenShots/post_view.png)   |  
 
 ## Documentation
 
